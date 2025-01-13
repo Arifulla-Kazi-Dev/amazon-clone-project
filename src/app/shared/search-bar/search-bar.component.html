@@ -1,0 +1,11 @@
+<!-- search-bar.component.html -->
+<form (submit)="onSearch()" class="search-form">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      placeholder="Search products..."
+      class="search-input"
+    />
+    <button type="submit" class="search-button">Search</button>
+  </form>
+  

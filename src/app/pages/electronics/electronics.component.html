@@ -1,0 +1,7 @@
+<div class="category-container">
+    <h2>Electronics</h2>
+    <div class="product-grid">
+      <app-product-card *ngFor="let product of electronicsProducts" [product]="product" (addToCart)="addToCart(product)"></app-product-card>
+    </div>
+  </div>
+  

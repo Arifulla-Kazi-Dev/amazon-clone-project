@@ -1,0 +1,47 @@
+.category-container {
+    padding: 20px;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+  }
+  
+  .product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  
+/* Responsive Design */
+
+/* General adjustments for smaller screens */
+@media (max-width: 768px) {
+  .category-container {
+    padding: 10px; /* Reduce padding for smaller screens */
+  }
+  
+  h2 {
+    font-size: 1.5rem; /* Adjust font size for headings */
+  }
+  
+  .product-grid {
+    gap: 15px; /* Reduce gap between items */
+  }
+}
+
+/* Further optimizations for very small screens (mobile) */
+@media (max-width: 480px) {
+  h2 {
+    font-size: 1.2rem; /* Further reduce heading size */
+    margin-bottom: 15px; /* Adjust spacing */
+  }
+
+  .product-grid {
+    flex-direction: column; /* Stack items vertically */
+    gap: 10px; /* Minimize gap for compact display */
+  }
+}

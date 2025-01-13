@@ -1,0 +1,154 @@
+/* src/app/shared/product-card/product-card.component.scss */
+.product-card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    transition: box-shadow 0.3s;
+  }
+  
+  .product-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .product-card img {
+    width: 100%;
+    height: auto;
+  }
+  
+  button {
+    background-color: #ff9900;
+    color: white;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #e68a00;
+  }
+  
+
+
+  .product-image {
+    width: 100%;
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Specific background images for each product */
+.product-1 .product-image {
+    background-image: url('./../../Assets/Boult.jpg');
+}
+
+.product-2 .product-image {
+    background-image: url('./../../Assets/Asus.jpg');
+}
+
+.product-3 .product-image {
+  background-image: url('./../../Assets/Sony.jpg');
+}
+
+.product-4 .product-image {
+  background-image: url('./../../Assets/Apple iPhone 14.jpg');
+}
+
+.product-5 .product-image {
+  background-image: url('./../../Assets/Samsung 4K UHD TV.jpg');
+}
+
+.product-6 .product-image {
+    background-image: url('./../../Assets/Coffee.jpg');
+}
+
+.product-7 .product-image {
+  background-image: url('./../../Assets/Instant Pot Duo.jpg');
+}
+
+.product-8 .product-image {
+  background-image: url('./../../Assets/Dyson V11 Vacuum Cleaner.jpg');
+}
+
+.product-9 .product-image {
+  background-image: url('./../../Assets/Ninja Professional Blender.jpg');
+}
+
+.product-10 .product-image {
+  background-image: url('./../../Assets/Air Fryer.jpg');
+}
+
+.product-11 .product-image {
+  background-image: url('./../../Assets/Philips Air Purifier.jpg');
+}
+
+.product-12 .product-image {
+  background-image: url('./../../Assets/Levis Mens Jeans.jpg');
+}
+
+.product-13 .product-image {
+  background-image: url('./../../Assets/Ray-Ban Aviator Sunglasses.jpg');
+}
+
+.product-14 .product-image {
+  background-image: url('./../../Assets/Nike Air Max Shoes.jpg');
+}
+
+.product-15 .product-image {
+  background-image: url('./../../Assets/Adidas Running Shoes.jpg');
+}
+
+.product-16 .product-image {
+  background-image: url('./../../Assets/Fossil Watch.jpg');
+}
+
+.product-17 .product-image {
+  background-image: url('./../../Assets/Tommy Hilfiger Wallet.jpg');
+}
+
+
+/* Responsive Design */
+
+/* Medium screens (tablets) */
+@media (max-width: 768px) {
+  .product-card {
+    padding: 8px; /* Reduce padding for compact layout */
+    text-align: left; /* Align text to the left for better readability */
+  }
+
+  .product-card img {
+    height: auto; /* Ensure image adapts to available space */
+  }
+
+  button {
+    font-size: 14px; /* Adjust button text size */
+    padding: 6px; /* Compact button for better fit */
+  }
+
+  .product-image {
+    height: 120px; /* Adjust image height */
+  }
+}
+
+/* Small screens (mobile) */
+@media (max-width: 480px) {
+  .product-card {
+    padding: 5px; /* Further reduce padding */
+    text-align: left;
+  }
+
+  .product-card img {
+    width: 100%; /* Ensure images are fluid */
+    height: auto;
+  }
+
+  button {
+    font-size: 12px; /* Smaller button text */
+    padding: 5px; /* Reduce padding for small screens */
+  }
+
+  .product-image {
+    height: 100px; /* Decrease image height */
+  }
+}

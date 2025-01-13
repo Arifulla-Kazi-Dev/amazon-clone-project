@@ -1,0 +1,29 @@
+<nav class="navbar">
+  <!-- Logo -->
+  <div class="navbar-logo">
+    <a (click)="navigateHome()">Amazon</a>
+  </div>
+
+  <!-- Search Bar -->
+  <!-- Search form -->
+<form (submit)="onSearch(searchInput.value); $event.preventDefault()">
+  <input #searchInput type="text" placeholder="Search products" />
+  <button type="submit">Search</button>
+</form>
+
+
+  <!-- Navigation Links -->
+  <ul class="navbar-links">
+    <li *ngFor="let category of categories">
+      <a (click)="navigateToCategory(category.route)">{{ category.name }}</a>
+    </li>
+    <li><a (click)="navigateToAccount()">Account</a></li>
+    <li class="cart-icon" (click)="goToCart()">
+      <!-- Add an icon or text for the cart -->
+      <img src="/assets/cart-icon.jpg" alt="Cart" />
+      <span *ngIf="cartItemCount > 0" class="cart-count">{{ cartItemCount }}</span>
+    </li>
+    
+  </ul>
+</nav>
+

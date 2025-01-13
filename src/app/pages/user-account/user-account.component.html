@@ -1,0 +1,53 @@
+<div class="user-account">
+  <h1>My Account</h1>
+
+  <!-- Personal Information Section -->
+  <section class="personal-info">
+    <h2>Personal Information</h2>
+    <div *ngIf="!editMode; else editTemplate">
+      <p><strong>Name:</strong> {{ user.name }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p><strong>Phone:</strong> {{ user.phone }}</p>
+      <p><strong>Address:</strong> {{ user.address }}</p>
+      <button (click)="toggleEditMode()">Edit</button>
+    </div>
+    <ng-template #editTemplate>
+      <form (ngSubmit)="savePersonalInfo()">
+        <label>Name: <input [(ngModel)]="user.name" name="name" /></label>
+        <label>Email: <input [(ngModel)]="user.email" name="email" type="email" /></label>
+        <label>Phone: <input [(ngModel)]="user.phone" name="phone" /></label>
+
+        <!-- Address Form Component -->
+        <app-address-form [addressData]="userAddress" (addressSubmitted)="onAddressUpdate($event)"></app-address-form>
+
+        <button type="submit">Save</button>
+        <button type="button" (click)="toggleEditMode()">Cancel</button>
+      </form>
+    </ng-template>
+  </section>
+
+  <!-- Order History Section -->
+  <section class="order-history">
+    <h2>Order History</h2>
+    <div *ngIf="user.orders.length > 0; else noOrders">
+      <div *ngFor="let order of user.orders" class="order-item">
+        <p><strong>Order ID:</strong> {{ order.id }}</p>
+        <p><strong>Date:</strong> {{ order.date }}</p>
+        <p><strong>Total:</strong> {{ order.total | currency }}</p>
+        <button (click)="viewOrder(order.id)">View Details</button>
+      </div>
+    </div>
+    <ng-template #noOrders>
+      <p>No orders available.</p>
+    </ng-template>
+  </section>
+
+  <!-- Account Settings Section -->
+  <section class="account-settings">
+    <h2>Account Settings</h2>
+    <p><strong>Subscription Status:</strong> {{ user.subscriptionStatus }}</p>
+    <p><strong>Notifications:</strong> {{ user.notificationsEnabled ? 'Enabled' : 'Disabled' }}</p>
+    <button (click)="toggleNotifications()">{{ user.notificationsEnabled ? 'Disable' : 'Enable' }} Notifications</button>
+    <button (click)="changePassword()">Change Password</button>
+  </section>
+</div>

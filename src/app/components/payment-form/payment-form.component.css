@@ -1,0 +1,139 @@
+/* payment-form.component.css */
+
+.payment-form {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background: #f4f4f9;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    font-family: Arial, sans-serif;
+}
+
+.payment-form h2 {
+    text-align: center;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #0066cc;
+}
+
+.form-group input.ng-invalid.ng-touched {
+    border-color: #ff4d4d;
+}
+
+.form-group div {
+    font-size: 12px;
+    color: #ff4d4d;
+    margin-top: 4px;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #0066cc;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #005bb5;
+}
+
+button[type="submit"]:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Responsive Design */
+
+/* Medium Screens (Tablets) */
+@media (max-width: 768px) {
+    .payment-form {
+        padding: 15px;
+        margin: 20px auto; /* Adjust margin for better layout */
+    }
+
+    .payment-form h2 {
+        font-size: 20px; /* Adjust heading font size for smaller screens */
+    }
+
+    .form-group {
+        margin-bottom: 15px; /* Reduce the space between form groups */
+    }
+
+    .form-group label {
+        font-size: 13px; /* Adjust label font size */
+    }
+
+    .form-group input {
+        padding: 12px; /* Slightly increase input padding */
+        font-size: 14px; /* Adjust font size for smaller screens */
+    }
+
+    button[type="submit"] {
+        padding: 10px; /* Adjust button padding */
+        font-size: 14px; /* Adjust font size */
+    }
+}
+
+/* Small Screens (Mobile) */
+@media (max-width: 480px) {
+    .payment-form {
+        padding: 10px;
+        margin: 10px auto; /* Further reduce margin for mobile */
+    }
+
+    .payment-form h2 {
+        font-size: 18px; /* Smaller heading size for mobile */
+    }
+
+    .form-group {
+        margin-bottom: 12px; /* Reduce space between form groups */
+    }
+
+    .form-group label {
+        font-size: 12px; /* Smaller font size for labels */
+    }
+
+    .form-group input {
+        padding: 10px; /* Adjust input padding for mobile */
+        font-size: 14px; /* Font size suitable for mobile */
+    }
+
+    button[type="submit"] {
+        padding: 8px; /* Adjust button padding for small screens */
+        font-size: 14px; /* Adjust font size for readability */
+    }
+}
+

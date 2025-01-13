@@ -1,0 +1,9 @@
+<div class="product-card" [ngClass]="'product-' + product.id">
+  <div class="product-image"></div>
+  <div class="product-info">
+      <h3>{{ product.name }}</h3>
+      <p>{{ product.description }}</p>
+      <p class="price">${{ product.price }}</p>
+      <button (click)="addToCart.emit(product)" class="add-to-cart-button">Add to Cart</button>
+  </div> 
+</div>

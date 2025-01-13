@@ -1,0 +1,37 @@
+<div class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Welcome to Our Store!</h1>
+        <p>Find the best products at unbeatable prices.</p>
+        <a routerLink="/products" class="shop-now-btn">Shop Now</a>
+      </div>
+    </section>
+  
+    <!-- Categories Section -->
+    <section class="categories">
+      <h2>Shop by Category</h2>
+      <div class="category-list">
+        <div 
+          *ngFor="let category of categories" 
+          class="category-card" 
+          [ngClass]="formatCategoryName(category.name)"
+          (click)="onCategoryClick(category.route)">
+          <h3>{{ category.name }}</h3>
+        </div>
+      </div>
+    </section>
+  
+    <!-- Featured Products Section -->
+    <section class="featured-products">
+      <h2>Featured Products</h2>
+      <div class="product-grid">
+        <app-product-card
+          *ngFor="let product of featuredProducts"
+          [product]="product"
+          (addToCart)="addToCart($event)">
+        </app-product-card>
+      </div>
+    </section>
+  </div>
+  

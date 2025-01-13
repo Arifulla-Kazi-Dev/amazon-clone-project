@@ -1,0 +1,26 @@
+/* src/app/pages/product-list/product-list.component.scss */
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  /* Responsive Design */
+
+/* Medium screens (tablets) */
+@media (max-width: 768px) {
+  .product-list {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjust column size */
+    gap: 15px; /* Reduce gap between grid items */
+    padding: 15px; /* Reduce padding */
+  }
+}
+
+/* Small screens (mobile) */
+@media (max-width: 480px) {
+  .product-list {
+    grid-template-columns: 1fr; /* Single column layout */
+    gap: 10px; /* Smaller gap for compact spacing */
+    padding: 10px; /* Further reduce padding */
+  }
+}

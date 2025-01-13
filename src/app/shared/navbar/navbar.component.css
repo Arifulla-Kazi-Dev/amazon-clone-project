@@ -1,0 +1,192 @@
+/* General Navbar Styling */
+.navbar {
+  display: flex;
+  align-items: center;
+  background-color: #131921;
+  padding: 10px 20px;
+  color: white;
+  justify-content: space-between;
+}
+
+/* Logo */
+.navbar-logo a {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Search Bar */
+.navbar-search {
+  display: flex;
+  align-items: center;
+  width: 60%;
+  max-width: 700px;
+  background-color: #febd69;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 0 20px;
+}
+
+/* Search Category Dropdown */
+.search-category-dropdown {
+  height: 36px;
+  border: none;
+  padding: 0 10px;
+  font-size: 14px;
+  background-color: #f3f3f3;
+  color: #111;
+  border-right: 1px solid #ccc;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Search Input */
+.navbar-search input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  font-size: 14px;
+  outline: none;
+}
+
+/* Search Button */
+.navbar-search button {
+  background-color: #febd69;
+  padding: 0 16px;
+  border: none;
+  cursor: pointer;
+  background-image: url('/assets/search-icon.svg'); /* Add icon path */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px;
+  width: 45px;
+}
+
+/* Navigation Links */
+.navbar-links {
+  display: flex;
+  list-style: none;
+  gap: 15px;
+}
+
+.navbar-links li {
+  position: relative;
+}
+
+.navbar-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0 5px;
+}
+
+.navbar-links a:hover {
+  color: #febd69;
+  text-decoration: underline;
+}
+
+/* Cart Icon */
+.cart-icon img {
+  width: 30px;
+  height: 30px;
+}
+
+.cart-count {
+  background-color: #f08804;
+  color: #ffffff;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-size: 12px;
+  position: absolute;
+  top: -5px;
+  right: -10px;
+}
+
+/* Responsive Design */
+
+/* Medium screens (tablets) */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: flex-start;
+    padding: 15px;
+  }
+
+  .navbar-logo {
+    margin-bottom: 10px; /* Space below the logo */
+  }
+
+  .navbar-search {
+    width: 100%; /* Expand search bar to full width */
+    margin: 10px 0;
+  }
+
+  .navbar-links {
+    justify-content: center; /* Center navigation links */
+    flex-wrap: wrap; /* Allow wrapping of links */
+    gap: 10px;
+  }
+
+  .navbar-links a {
+    font-size: 12px; /* Adjust font size for compact screens */
+  }
+
+  .cart-icon {
+    margin-top: 10px; /* Space above the cart icon */
+  }
+}
+
+/* Small screens (mobile) */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 10px; /* Reduce padding for smaller devices */
+  }
+
+  .navbar-logo a {
+    font-size: 20px; /* Reduce logo font size */
+  }
+
+  .navbar-search {
+    margin: 10px 0; /* Maintain spacing around search bar */
+    width: 100%;
+  }
+
+  .search-category-dropdown {
+    font-size: 12px; /* Smaller font size for dropdown */
+    padding: 0 5px; /* Reduce padding */
+  }
+
+  .navbar-search input[type="text"] {
+    font-size: 12px; /* Smaller text input */
+  }
+
+  .navbar-search button {
+    background-size: 16px; /* Smaller search icon */
+    width: 36px; /* Smaller button width */
+  }
+
+  .navbar-links {
+    flex-direction: column; /* Stack links vertically */
+    gap: 8px; /* Adjust spacing */
+    width: 100%; /* Align with navbar width */
+    text-align: center; /* Center-align links */
+  }
+
+  .navbar-links a {
+    font-size: 12px; /* Smaller font size */
+  }
+
+  .cart-icon {
+    margin: 10px 0 0; /* Adjust spacing */
+  }
+
+  .cart-count {
+    top: -3px; /* Adjust position */
+    right: -5px;
+    font-size: 10px; /* Smaller badge */
+    padding: 1px 4px; /* Adjust padding */
+  }
+}

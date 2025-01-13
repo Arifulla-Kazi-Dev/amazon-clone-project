@@ -1,0 +1,15 @@
+<div>
+  <h2>Search Results for "{{ searchTerm }}"</h2>
+
+  <div *ngIf="searchResults.length > 0; else noResults">
+    <div *ngFor="let product of searchResults" class="product-card">
+      <h3>{{ product.name }}</h3>
+      <p>{{ product.description }}</p>
+      <p>Price: ${{ product.price }}</p>
+    </div>
+  </div>
+
+  <ng-template #noResults>
+    <p>No products found for "{{ searchTerm }}".</p>
+  </ng-template>
+</div>

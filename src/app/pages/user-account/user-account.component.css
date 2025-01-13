@@ -1,0 +1,139 @@
+.user-account {
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  h1, h2 {
+    color: #333;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+  }
+  
+  .personal-info, .order-history, .account-settings {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  label {
+    display: block;
+    margin-top: 8px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+  }
+  
+  button {
+    margin-top: 12px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #0073e6;
+    color: white;
+  }
+  
+  button:hover {
+    background-color: #005bb5;
+  }
+  
+  .order-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+  }
+  
+  .order-item p {
+    margin: 4px 0;
+  }
+  
+  .order-item button {
+    margin-top: 10px;
+    background-color: #ff9800;
+  }
+  
+  .order-item button:hover {
+    background-color: #e68900;
+  }
+  
+  /* Responsive Design */
+
+/* Medium Screens (Tablets) */
+@media (max-width: 768px) {
+  .user-account {
+    padding: 20px;
+    font-size: 14px; /* Adjust font size for smaller screens */
+  }
+
+  h1, h2 {
+    font-size: 20px; /* Adjust heading sizes for readability */
+  }
+
+  .personal-info, .order-history, .account-settings {
+    padding: 12px;
+  }
+
+  label {
+    font-size: 14px; /* Slightly smaller label font size */
+  }
+
+  input {
+    padding: 10px; /* Increase input padding for easier typing */
+  }
+
+  button {
+    padding: 8px 16px; /* Reduce button size for smaller screens */
+  }
+
+  .order-item {
+    padding: 8px 0; /* Slightly reduce padding in order items */
+  }
+
+  .order-item button {
+    padding: 8px 16px; /* Reduce button padding in order items */
+  }
+}
+
+/* Small Screens (Mobile) */
+@media (max-width: 480px) {
+  .user-account {
+    padding: 10px;
+    font-size: 12px; /* Adjust font size for mobile */
+  }
+
+  h1, h2 {
+    font-size: 18px; /* Adjust heading sizes for better mobile readability */
+  }
+
+  .personal-info, .order-history, .account-settings {
+    padding: 10px;
+  }
+
+  label {
+    font-size: 12px; /* Adjust label size for mobile */
+  }
+
+  input {
+    padding: 12px; /* Ensure inputs are large enough for mobile users */
+  }
+
+  button {
+    padding: 6px 12px; /* Smaller button for better fit on small screens */
+  }
+
+  .order-item {
+    padding: 6px 0; /* Reduce padding for order items on mobile */
+  }
+
+  .order-item button {
+    padding: 6px 12px; /* Adjust button size within order items */
+  }
+}
