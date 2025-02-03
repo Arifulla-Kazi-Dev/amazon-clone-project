@@ -8,11 +8,10 @@ import { CartService } from '../../services/cart.service';
 
 
 @Component({
-  selector: 'app-HomeKitchen',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ProductCardComponent],
-  templateUrl: './home-kitchen.component.html',
-  styleUrl: './home-kitchen.component.css'// Changed to styleUrls
+    selector: 'app-HomeKitchen',
+    imports: [CommonModule, FormsModule, ProductCardComponent],
+    templateUrl: './home-kitchen.component.html',
+    styleUrl: './home-kitchen.component.css' // Changed to styleUrls
 })
 export class HomeKitchenComponent implements OnInit {
   HomeKitchenProducts: Product[] = [];

@@ -4,11 +4,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-order-history',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './order-history.component.html',
-  styleUrl: './order-history.component.css'
+    selector: 'app-order-history',
+    imports: [CommonModule, FormsModule],
+    templateUrl: './order-history.component.html',
+    styleUrl: './order-history.component.css'
 })
 export class OrderHistoryComponent implements OnInit {
   orders: any[] = [];

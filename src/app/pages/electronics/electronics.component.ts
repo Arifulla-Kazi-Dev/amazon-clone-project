@@ -8,11 +8,10 @@ import { FormsModule } from '@angular/forms';
 import { ProductCardComponent } from "../../shared/product-card/product-card.component";
 
 @Component({
-  selector: 'app-electronics',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ProductCardComponent],
-  templateUrl: './electronics.component.html',
-  styleUrls: ['./electronics.component.css']
+    selector: 'app-electronics',
+    imports: [CommonModule, FormsModule, ProductCardComponent],
+    templateUrl: './electronics.component.html',
+    styleUrls: ['./electronics.component.css']
 })
 export class ElectronicsComponent implements OnInit {
   electronicsProducts: Product[] = [];

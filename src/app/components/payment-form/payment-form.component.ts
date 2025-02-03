@@ -4,11 +4,10 @@ import { PaymentService } from '../../services/payment.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-payment-form',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
-  templateUrl: './payment-form.component.html',
-  styleUrl: './payment-form.component.css'
+    selector: 'app-payment-form',
+    imports: [CommonModule, FormsModule, ReactiveFormsModule],
+    templateUrl: './payment-form.component.html',
+    styleUrl: './payment-form.component.css'
 })
 export class PaymentFormComponent {
   paymentForm: FormGroup;

@@ -3,11 +3,10 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-address-form',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
-  templateUrl: './address-form.component.html',
-  styleUrl: './address-form.component.css'
+    selector: 'app-address-form',
+    imports: [CommonModule, FormsModule, ReactiveFormsModule],
+    templateUrl: './address-form.component.html',
+    styleUrl: './address-form.component.css'
 })
 export class AddressFormComponent {
   @Input() addressData: any; // Input to load existing address data

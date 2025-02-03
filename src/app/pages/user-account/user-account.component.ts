@@ -4,11 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { AddressFormComponent } from '@app/components/address-form/address-form.component';
 
 @Component({
-  selector: 'app-user-account',
-  standalone: true,
-  imports: [CommonModule, FormsModule, AddressFormComponent],
-  templateUrl: './user-account.component.html',
-  styleUrls: ['./user-account.component.css']
+    selector: 'app-user-account',
+    imports: [CommonModule, FormsModule, AddressFormComponent],
+    templateUrl: './user-account.component.html',
+    styleUrls: ['./user-account.component.css']
 })
 export class UserAccountComponent {
   editMode = false;

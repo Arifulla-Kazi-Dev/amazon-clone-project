@@ -6,11 +6,10 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router'; // Import Router
 
 @Component({
-  selector: 'app-cart',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+    selector: 'app-cart',
+    imports: [CommonModule, FormsModule],
+    templateUrl: './cart.component.html',
+    styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
   cartItems: Product[] = [];

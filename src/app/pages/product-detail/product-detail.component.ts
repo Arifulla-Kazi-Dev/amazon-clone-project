@@ -7,11 +7,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-product-detail',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './product-detail.component.html',
-  styleUrls: ['./product-detail.component.css']
+    selector: 'app-product-detail',
+    imports: [CommonModule, FormsModule],
+    templateUrl: './product-detail.component.html',
+    styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
   product: Product | undefined;

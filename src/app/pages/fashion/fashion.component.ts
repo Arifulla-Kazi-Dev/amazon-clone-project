@@ -8,11 +8,10 @@ import { CartService } from '../../services/cart.service';
 
 
 @Component({
-  selector: 'app-fashion',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ProductCardComponent],
-  templateUrl: './fashion.component.html',
-  styleUrl: './fashion.component.css' // Changed to styleUrls
+    selector: 'app-fashion',
+    imports: [CommonModule, FormsModule, ProductCardComponent],
+    templateUrl: './fashion.component.html',
+    styleUrl: './fashion.component.css' // Changed to styleUrls
 })
 export class FashionComponent implements OnInit {
   fashionProducts: Product[] = [];

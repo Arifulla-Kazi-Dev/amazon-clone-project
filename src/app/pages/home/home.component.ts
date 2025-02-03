@@ -7,11 +7,10 @@ import { CartService } from '../../services/cart.service'; // Import CartService
 import { Product } from '../../models/product.model'; // Import Product model
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ProductCardComponent],
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+    selector: 'app-home',
+    imports: [CommonModule, FormsModule, ProductCardComponent],
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
   categories = [

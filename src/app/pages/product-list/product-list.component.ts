@@ -8,11 +8,10 @@ import { RouterModule } from '@angular/router'; // Import RouterModule for route
 import { CartService } from '../../services/cart.service';
 
 @Component({
-  selector: 'app-product-list',
-  standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, ProductCardComponent], // Include RouterModule here
-  templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+    selector: 'app-product-list',
+    imports: [CommonModule, FormsModule, RouterModule, ProductCardComponent], // Include RouterModule here
+    templateUrl: './product-list.component.html',
+    styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
   products: Product[] = [];

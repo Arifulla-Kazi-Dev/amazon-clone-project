@@ -6,11 +6,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-search-results',
-  standalone: true,
-  imports: [CommonModule, FormsModule], 
-  templateUrl: './search-results.component.html',
-  styleUrls: ['./search-results.component.css']
+    selector: 'app-search-results',
+    imports: [CommonModule, FormsModule],
+    templateUrl: './search-results.component.html',
+    styleUrls: ['./search-results.component.css']
 })
 export class SearchResultsComponent implements OnInit {
   searchTerm: string = '';

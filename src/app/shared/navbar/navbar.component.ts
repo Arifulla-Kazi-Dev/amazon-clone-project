@@ -4,11 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-navbar',
-  standalone: true,
-  imports: [ CommonModule, FormsModule],
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+    selector: 'app-navbar',
+    imports: [CommonModule, FormsModule],
+    templateUrl: './navbar.component.html',
+    styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
   navigateToAccount() {
