@@ -1,0 +1,21 @@
+{
+  "routes": {
+    "/amazon-clone-project": {},
+    "/amazon-clone-project/account": {},
+    "/amazon-clone-project/admin": {},
+    "/amazon-clone-project/admin/orders": {},
+    "/amazon-clone-project/admin/products": {},
+    "/amazon-clone-project/cart": {},
+    "/amazon-clone-project/checkout": {},
+    "/amazon-clone-project/electronics": {},
+    "/amazon-clone-project/fashion": {},
+    "/amazon-clone-project/home": {},
+    "/amazon-clone-project/home-kitchen": {},
+    "/amazon-clone-project/payment": {},
+    "/amazon-clone-project/product/1": {},
+    "/amazon-clone-project/product/2": {},
+    "/amazon-clone-project/product/3": {},
+    "/amazon-clone-project/products": {},
+    "/amazon-clone-project/search": {}
+  }
+}
