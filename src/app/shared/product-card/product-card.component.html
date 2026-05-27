@@ -1,9 +1,35 @@
-<div class="product-card" [ngClass]="'product-' + product.id">
-  <div class="product-image"></div>
+<article class="product-card">
+  <div class="media">
+    <a [routerLink]="['/product', product.id]" [attr.aria-label]="'View ' + product.name">
+      <img [src]="product.image" [alt]="product.name" width="320" height="255" loading="lazy" decoding="async" (error)="showFallbackImage($event)">
+    </a>
+    <span *ngIf="product.badge" class="badge">{{ product.badge }}</span>
+    <button class="favorite" type="button" (click)="toggleFavorite()" [class.selected]="isFavorite" [attr.aria-label]="isFavorite ? 'Remove from saved items' : 'Save item'">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20.8 8.8c0 5.5-8.8 10.4-8.8 10.4S3.2 14.3 3.2 8.8a4.5 4.5 0 0 1 8.8-1.2 4.5 4.5 0 0 1 8.8 1.2Z"></path>
+      </svg>
+    </button>
+  </div>
+
   <div class="product-info">
-      <h3>{{ product.name }}</h3>
-      <p>{{ product.description }}</p>
-      <p class="price">${{ product.price }}</p>
-      <button (click)="addToCart.emit(product)" class="add-to-cart-button">Add to Cart</button>
-  </div> 
-</div>
+    <p class="category">{{ categoryLabel }}</p>
+    <a class="title" [routerLink]="['/product', product.id]">{{ product.name }}</a>
+    <div class="rating" [attr.aria-label]="(product.rating || 0) + ' out of 5 stars'">
+      <span class="star">&#9733;</span>
+      <strong>{{ product.rating | number: '1.1-1' }}</strong>
+      <span>({{ product.reviewCount }})</span>
+    </div>
+    <p class="description">{{ product.description }}</p>
+    <div class="pricing">
+      <strong>{{ product.price | currency: 'INR': 'symbol': '1.0-0' }}</strong>
+      <del *ngIf="product.previousPrice">{{ product.previousPrice | currency: 'INR': 'symbol': '1.0-0' }}</del>
+      <span class="discount" *ngIf="discountPercentage as discount">-{{ discount }}%</span>
+    </div>
+    <button class="add-button" type="button" (click)="addToCartClicked()" [class.added]="isInCart" [disabled]="isInCart">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path [attr.d]="isInCart ? 'm5 12 4.4 4.4L19 7' : 'M12 5v14M5 12h14'"></path>
+      </svg>
+      {{ isInCart ? 'Already in cart' : 'Add to cart' }}
+    </button>
+  </div>
+</article>

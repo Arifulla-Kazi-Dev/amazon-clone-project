@@ -1,1 +1,24 @@
-<p>admin-dashboard works!</p>
+<div class="page-shell admin-page">
+  <header>
+    <div>
+      <p class="eyebrow">Operations</p>
+      <h1 class="page-title">Store dashboard</h1>
+    </div>
+    <a class="btn btn-outline" routerLink="/">Return to shop</a>
+  </header>
+
+  <nav class="admin-nav panel" aria-label="Administration">
+    <a routerLink="/admin" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">Overview</a>
+    <a routerLink="/admin/products" routerLinkActive="active">Products</a>
+    <a routerLink="/admin/orders" routerLinkActive="active">Orders</a>
+  </nav>
+
+  <section class="metrics" aria-label="Performance snapshot">
+    <div class="panel"><span>Revenue today</span><strong>&#8377;3,48,200</strong><small>+12.4% vs yesterday</small></div>
+    <div class="panel"><span>New orders</span><strong>38</strong><small>7 awaiting dispatch</small></div>
+    <div class="panel"><span>Products live</span><strong>17</strong><small>All departments active</small></div>
+    <div class="panel"><span>Customer rating</span><strong>4.7</strong><small>Across recent reviews</small></div>
+  </section>
+
+  <router-outlet></router-outlet>
+</div>

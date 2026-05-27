@@ -13,5 +13,6 @@
         "RFID",
         "Vivobook",
         "vlogger"
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
 }

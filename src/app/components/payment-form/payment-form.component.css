@@ -1,139 +1,188 @@
-/* payment-form.component.css */
+.payment-page {
+  padding-block: clamp(32px, 6vw, 66px);
+}
+
+.payment-empty {
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.payment-layout {
+  display: grid;
+  gap: 25px;
+  grid-template-columns: minmax(360px, 590px) 320px;
+  justify-content: center;
+}
+
+.intro {
+  margin: 12px 0 27px;
+}
 
 .payment-form {
-    max-width: 400px;
-    margin: 40px auto;
-    padding: 20px;
-    border-radius: 8px;
-    background: #f4f4f9;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: clamp(20px, 4vw, 31px);
 }
 
-.payment-form h2 {
-    text-align: center;
-    color: #333;
-    font-weight: 600;
-    margin-bottom: 20px;
+.demo-note {
+  align-items: center;
+  background: #fff7ed;
+  border-radius: 10px;
+  color: #9a3412;
+  display: flex;
+  font-size: 0.83rem;
+  gap: 9px;
+  margin-bottom: 4px;
+  padding: 12px;
 }
 
-.form-group {
-    margin-bottom: 20px;
+.demo-note svg {
+  fill: none;
+  flex-shrink: 0;
+  height: 21px;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+  width: 21px;
 }
 
-.form-group label {
-    display: block;
-    font-size: 14px;
-    font-weight: 600;
-    color: #555;
-    margin-bottom: 8px;
+.payment-form label {
+  color: var(--ink-800);
+  display: flex;
+  flex-direction: column;
+  font-size: 0.86rem;
+  font-weight: 600;
+  gap: 7px;
 }
 
-.form-group input {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    outline: none;
-    transition: border-color 0.3s;
+.payment-form small {
+  color: var(--danger);
+  font-size: 0.77rem;
 }
 
-.form-group input:focus {
-    border-color: #0066cc;
+.payment-form .field {
+  width: 100%;
 }
 
-.form-group input.ng-invalid.ng-touched {
-    border-color: #ff4d4d;
+.row {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, 1fr);
 }
 
-.form-group div {
-    font-size: 12px;
-    color: #ff4d4d;
-    margin-top: 4px;
+.payment-form button {
+  margin-top: 5px;
+  width: 100%;
 }
 
-button[type="submit"] {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #fff;
-    background-color: #0066cc;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+.reassurance {
+  margin-top: 112px;
+  padding: 25px;
 }
 
-button[type="submit"]:hover {
-    background-color: #005bb5;
+.reassurance h2 {
+  font-size: 1.17rem;
+  margin-bottom: 9px;
 }
 
-button[type="submit"]:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+.reassurance > p {
+  color: var(--ink-600);
+  font-size: 0.86rem;
+  line-height: 1.6;
+  margin-bottom: 23px;
 }
 
-/* Responsive Design */
-
-/* Medium Screens (Tablets) */
-@media (max-width: 768px) {
-    .payment-form {
-        padding: 15px;
-        margin: 20px auto; /* Adjust margin for better layout */
-    }
-
-    .payment-form h2 {
-        font-size: 20px; /* Adjust heading font size for smaller screens */
-    }
-
-    .form-group {
-        margin-bottom: 15px; /* Reduce the space between form groups */
-    }
-
-    .form-group label {
-        font-size: 13px; /* Adjust label font size */
-    }
-
-    .form-group input {
-        padding: 12px; /* Slightly increase input padding */
-        font-size: 14px; /* Adjust font size for smaller screens */
-    }
-
-    button[type="submit"] {
-        padding: 10px; /* Adjust button padding */
-        font-size: 14px; /* Adjust font size */
-    }
+.reassurance div {
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  font-size: 0.86rem;
+  padding: 15px 0;
 }
 
-/* Small Screens (Mobile) */
-@media (max-width: 480px) {
-    .payment-form {
-        padding: 10px;
-        margin: 10px auto; /* Further reduce margin for mobile */
-    }
-
-    .payment-form h2 {
-        font-size: 18px; /* Smaller heading size for mobile */
-    }
-
-    .form-group {
-        margin-bottom: 12px; /* Reduce space between form groups */
-    }
-
-    .form-group label {
-        font-size: 12px; /* Smaller font size for labels */
-    }
-
-    .form-group input {
-        padding: 10px; /* Adjust input padding for mobile */
-        font-size: 14px; /* Font size suitable for mobile */
-    }
-
-    button[type="submit"] {
-        padding: 8px; /* Adjust button padding for small screens */
-        font-size: 14px; /* Adjust font size for readability */
-    }
+.reassurance div span {
+  color: var(--ink-600);
+  font-size: 0.78rem;
+  margin-top: 3px;
 }
 
+.reassurance a {
+  color: var(--primary);
+  display: block;
+  font-size: 0.86rem;
+  font-weight: 600;
+  margin-top: 13px;
+}
+
+.payment-success {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 20px auto;
+  max-width: 560px;
+  padding: clamp(32px, 7vw, 60px);
+  text-align: center;
+}
+
+.check {
+  align-items: center;
+  background: #dcfce7;
+  border-radius: 50%;
+  color: var(--success);
+  display: inline-flex;
+  height: 65px;
+  justify-content: center;
+  margin-bottom: 24px;
+  width: 65px;
+}
+
+.check svg {
+  fill: none;
+  height: 32px;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 2.5;
+  width: 32px;
+}
+
+.payment-success h1 {
+  font-size: 2rem;
+  letter-spacing: -0.045em;
+  margin: 8px 0 13px;
+}
+
+.payment-success > p:not(.eyebrow) {
+  color: var(--ink-600);
+}
+
+.payment-success .charged {
+  color: var(--ink-950);
+  margin-top: 12px;
+}
+
+.success-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+@media (max-width: 780px) {
+  .payment-layout {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .reassurance {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 470px) {
+  .row,
+  .success-actions {
+    display: flex;
+    flex-direction: column;
+  }
+}

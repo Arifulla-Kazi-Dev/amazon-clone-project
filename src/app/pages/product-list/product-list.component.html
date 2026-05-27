@@ -1,10 +1,68 @@
-<div class="product-list">
-  <div *ngFor="let product of products" class="product-card-link">
-    <!-- Link to product detail page -->
-    <a [routerLink]="['/product', product.id]">
-      <app-product-card [product]="product"></app-product-card>
-    </a>
-    <!-- Add to Cart button for each product -->
-    <button (click)="addToCart(product)">Add to Cart</button>
+<div class="page-shell catalog-page">
+  <header class="catalog-header">
+    <div>
+      <p class="eyebrow">Our collection</p>
+      <h1 class="page-title">Find your next favorite</h1>
+      <p class="muted">Explore essentials chosen for quality, comfort, and everyday use.</p>
+    </div>
+  </header>
+
+  <div class="catalog-layout">
+    <aside class="filters panel" aria-label="Product filters">
+      <div class="filter-heading">
+        <h2>Filters</h2>
+        <button type="button" (click)="clearFilters()">Reset</button>
+      </div>
+
+      <label class="filter-group">
+        <span>Search</span>
+        <input class="field" [(ngModel)]="query" type="search" placeholder="Keyword">
+      </label>
+
+      <div class="filter-group">
+        <span>Department</span>
+        <div class="department-options" role="group" aria-label="Filter by department">
+          <button *ngFor="let category of categories" type="button" [class.active]="selectedCategory === category.value" (click)="selectedCategory = category.value">{{ category.label }}</button>
+        </div>
+      </div>
+
+      <label class="filter-group price-range">
+        <span>Price up to <strong>{{ maxPrice | currency: 'INR': 'symbol': '1.0-0' }}</strong></span>
+        <input [(ngModel)]="maxPrice" type="range" min="1000" max="80000" step="1000">
+        <small><span>&#8377;1,000</span><span>&#8377;80,000</span></small>
+      </label>
+
+      <div class="delivery-note">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v10H3zm11 4h4l3 3v3h-7zM7 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm10 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"></path></svg>
+        <p><strong>Free standard delivery</strong><span>Eligible orders &#8377;999+</span></p>
+      </div>
+    </aside>
+
+    <section class="results">
+      <div class="results-top">
+        <p><strong>{{ filteredProducts.length }}</strong> products</p>
+        <label>
+          <span>Sort by</span>
+          <select class="field" [(ngModel)]="sortOption">
+            <option value="featured">Featured</option>
+            <option value="rating">Top rated</option>
+            <option value="price-low">Price: low to high</option>
+            <option value="price-high">Price: high to low</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="product-grid" *ngIf="filteredProducts.length; else emptyResults">
+        <app-product-card *ngFor="let product of filteredProducts" [product]="product" (addToCart)="addToCart($event)"></app-product-card>
+      </div>
+      <ng-template #emptyResults>
+        <div class="empty-state">
+          <svg viewBox="0 0 24 24"><path d="m21 21-4.7-4.7m2-5.05a7.05 7.05 0 1 1-14.1 0 7.05 7.05 0 0 1 14.1 0Z"></path></svg>
+          <h2>No matches found</h2>
+          <p>Try adjusting your category, keyword, or price limit.</p>
+          <button type="button" class="btn btn-primary" (click)="clearFilters()">Clear filters</button>
+        </div>
+      </ng-template>
+    </section>
   </div>
 </div>

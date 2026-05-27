@@ -1,34 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { Product } from '../../models/product.model';
-import { ProductService } from '../../services/product.services'; // Ensure correct file name
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { ProductCardComponent } from "../../shared/product-card/product-card.component";
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { Product } from '../../models/product.model';
 import { CartService } from '../../services/cart.service';
-
+import { ProductService } from '../../services/product.services';
+import { ProductCardComponent } from '../../shared/product-card/product-card.component';
 
 @Component({
-    selector: 'app-fashion',
-    imports: [CommonModule, FormsModule, ProductCardComponent],
-    templateUrl: './fashion.component.html',
-    styleUrl: './fashion.component.css' // Changed to styleUrls
+  selector: 'app-fashion',
+  imports: [CommonModule, RouterLink, ProductCardComponent],
+  templateUrl: './fashion.component.html',
+  styleUrl: './fashion.component.css'
 })
-export class FashionComponent implements OnInit {
-  fashionProducts: Product[] = [];
+export class FashionComponent {
+  readonly title = 'Fashion';
+  readonly description = 'Wear-anywhere pieces selected for comfort, quality, and timeless style.';
+  readonly products: Product[];
 
-  constructor(private productService: ProductService, private cartService: CartService) {}
-
-  ngOnInit(): void {
-    this.loadFashionProducts();
-  }
-
-  private loadFashionProducts(): void {
-    this.fashionProducts = this.productService['getProductsByCategory']('Fashion');
-    console.log(this.fashionProducts); // Add this to verify it returns products
+  constructor(productService: ProductService, private cartService: CartService) {
+    this.products = productService.getProductsByCategory('Fashion');
   }
 
   addToCart(product: Product): void {
-    this.cartService.addToCart(product); 
-    console.log("Product added to cart:", product);
+    this.cartService.addToCart(product);
   }
 }

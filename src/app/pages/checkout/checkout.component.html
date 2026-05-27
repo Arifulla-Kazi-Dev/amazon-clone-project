@@ -1,1 +1,59 @@
-<p>checkout works!</p>
+<div class="page-shell checkout-page">
+  <div class="checkout-heading">
+    <p class="eyebrow">Checkout</p>
+    <h1 class="page-title">Delivery details</h1>
+    <div class="steps" aria-label="Checkout steps">
+      <span class="done">Cart</span><i></i><span class="current">Delivery</span><i></i><span>Payment</span>
+    </div>
+  </div>
+
+  <div class="checkout-layout" *ngIf="cartItems.length; else noItems">
+    <form class="delivery-form panel" (ngSubmit)="continueToPayment()">
+      <h2>Contact and delivery address</h2>
+      <div class="fields">
+        <label class="wide">Full name<input class="field" name="fullName" [(ngModel)]="shipping.fullName" required placeholder="Aarav Sharma"></label>
+        <label class="wide">Email address<input class="field" name="email" [(ngModel)]="shipping.email" required type="email" placeholder="aarav@example.com"></label>
+        <label class="wide">Street address<input class="field" name="address" [(ngModel)]="shipping.address" required placeholder="125 MG Road"></label>
+        <label>City<input class="field" name="city" [(ngModel)]="shipping.city" required placeholder="Bengaluru"></label>
+        <label>PIN code<input class="field" name="postalCode" [(ngModel)]="shipping.postalCode" required pattern="[0-9]{6}" placeholder="560001"></label>
+      </div>
+
+      <h2 class="delivery-title">Delivery method</h2>
+      <label class="delivery-option" [class.selected]="deliveryMethod === 'standard'">
+        <input type="radio" [(ngModel)]="deliveryMethod" name="deliveryMethod" value="standard">
+        <span><strong>Standard delivery</strong><small>Arrives in 2-4 business days</small></span>
+        <strong>{{ subtotal >= 999 ? 'Free' : (99 | currency: 'INR': 'symbol': '1.0-0') }}</strong>
+      </label>
+      <label class="delivery-option" [class.selected]="deliveryMethod === 'express'">
+        <input type="radio" [(ngModel)]="deliveryMethod" name="deliveryMethod" value="express">
+        <span><strong>Express delivery</strong><small>Arrives on the next business day</small></span>
+        <strong>{{ 199 | currency: 'INR': 'symbol': '1.0-0' }}</strong>
+      </label>
+
+      <button class="btn btn-primary pay-button" type="submit">Continue to payment</button>
+    </form>
+
+    <aside class="order-summary panel">
+      <h2>Your order</h2>
+      <article *ngFor="let item of cartItems">
+        <img [src]="item.image" [alt]="item.name" (error)="showFallbackImage($event)">
+        <div><strong>{{ item.name }}</strong><small>Qty {{ item.quantity }}</small></div>
+        <span>{{ item.price * item.quantity | currency: 'INR': 'symbol': '1.0-0' }}</span>
+      </article>
+      <div class="costs">
+        <p><span>Subtotal</span><strong>{{ subtotal | currency: 'INR': 'symbol': '1.0-0' }}</strong></p>
+        <p><span>Delivery</span><strong>{{ deliveryFee === 0 ? 'Free' : (deliveryFee | currency: 'INR': 'symbol': '1.0-0') }}</strong></p>
+        <p><span>GST (estimated)</span><strong>{{ tax | currency: 'INR': 'symbol': '1.0-0' }}</strong></p>
+        <p class="total"><span>Total</span><strong>{{ total | currency: 'INR': 'symbol': '1.0-0' }}</strong></p>
+      </div>
+    </aside>
+  </div>
+
+  <ng-template #noItems>
+    <div class="empty-state">
+      <h2>Your checkout is empty</h2>
+      <p>Add products to your cart before selecting delivery.</p>
+      <a class="btn btn-primary" routerLink="/products">Browse products</a>
+    </div>
+  </ng-template>
+</div>

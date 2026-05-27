@@ -1,48 +1,64 @@
-import { Component, OnInit } from '@angular/core';
-import { CartService } from '../../services/cart.service';
-import { Product } from '../../models/product.model';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router'; // Import Router
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { Product } from '../../models/product.model';
+import { CartService } from '../../services/cart.service';
 
 @Component({
-    selector: 'app-cart',
-    imports: [CommonModule, FormsModule],
-    templateUrl: './cart.component.html',
-    styleUrls: ['./cart.component.css']
+  selector: 'app-cart',
+  imports: [CommonModule, RouterLink],
+  templateUrl: './cart.component.html',
+  styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
   cartItems: Product[] = [];
-  total: number = 0;
+  subtotal = 0;
+  itemCount = 0;
 
-  constructor(private cartService: CartService, private router: Router) {} // Inject Router here
+  constructor(private cartService: CartService, private router: Router) {}
+
+  get delivery(): number {
+    return this.subtotal >= 999 ? 0 : 99;
+  }
+
+  get estimatedTax(): number {
+    return this.subtotal * 0.18;
+  }
+
+  get total(): number {
+    return this.subtotal + this.delivery + this.estimatedTax;
+  }
 
   ngOnInit(): void {
-    // Subscribe to cart items changes
     this.cartService.cartItems$.subscribe(items => {
       this.cartItems = items;
-      this.updateTotal();
+      this.subtotal = this.cartService.getTotal();
+      this.itemCount = this.cartService.getItemCount();
     });
   }
 
-  // Method to remove item from cart
+  increase(item: Product): void {
+    this.cartService.updateQuantity(item.id, item.quantity + 1);
+  }
+
+  decrease(item: Product): void {
+    this.cartService.updateQuantity(item.id, item.quantity - 1);
+  }
+
   removeFromCart(productId: number): void {
     this.cartService.removeFromCart(productId);
   }
 
-  // Method to clear the cart
   clearCart(): void {
     this.cartService.clearCart();
   }
 
-  // Update the total amount whenever cart items change
-  private updateTotal(): void {
-    this.total = this.cartItems.reduce((sum, item) => sum + item.price, 0);
+  onProceedToBuy(): void {
+    this.router.navigate(['/checkout']);
   }
 
-  // Handle "Proceed to Buy" action
-  onProceedToBuy() {
-    // Navigate to the checkout or payment page
-    this.router.navigate(['/payment']);  // Replace '/payment' with your intended path if different
+  showFallbackImage(event: Event): void {
+    const image = event.target as HTMLImageElement;
+    image.src = '/assets/product-placeholder.svg';
   }
 }

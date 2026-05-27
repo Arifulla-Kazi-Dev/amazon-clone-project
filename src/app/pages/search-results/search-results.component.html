@@ -1,15 +1,46 @@
-<div>
-  <h2>Search Results for "{{ searchTerm }}"</h2>
+<div class="page-shell search-page">
+  <header>
+    <p class="eyebrow">Search</p>
+    <h1 class="page-title">{{ searchTerm ? 'Results for "' + searchTerm + '"' : 'Browse all finds' }}</h1>
+  </header>
 
-  <div *ngIf="searchResults.length > 0; else noResults">
-    <div *ngFor="let product of searchResults" class="product-card">
-      <h3>{{ product.name }}</h3>
-      <p>{{ product.description }}</p>
-      <p>Price: ${{ product.price }}</p>
-    </div>
+  <form class="search-controls panel" (ngSubmit)="search()">
+    <label>
+      <span class="sr-only">Search products</span>
+      <input class="field" [(ngModel)]="searchTerm" name="searchTerm" type="search" placeholder="Search products">
+    </label>
+    <label>
+      <span class="sr-only">Department</span>
+      <select class="field" [(ngModel)]="selectedCategory" name="category">
+        <option *ngFor="let category of categories" [value]="category.value">{{ category.label }}</option>
+      </select>
+    </label>
+    <button class="btn btn-primary" type="submit">Search</button>
+  </form>
+
+  <div class="results-bar">
+    <p><strong>{{ searchResults.length }}</strong> matching products</p>
+    <label>
+      Sort by
+      <select class="field" [(ngModel)]="sortOption" (ngModelChange)="updateResults()">
+        <option value="relevance">Relevance</option>
+        <option value="rating">Top rated</option>
+        <option value="price-low">Price: low to high</option>
+        <option value="price-high">Price: high to low</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="product-grid" *ngIf="searchResults.length; else noResults">
+    <app-product-card *ngFor="let product of searchResults" [product]="product" (addToCart)="addToCart($event)"></app-product-card>
   </div>
 
   <ng-template #noResults>
-    <p>No products found for "{{ searchTerm }}".</p>
+    <div class="empty-state">
+      <svg viewBox="0 0 24 24"><path d="m21 21-4.7-4.7m2-5.05a7.05 7.05 0 1 1-14.1 0 7.05 7.05 0 0 1 14.1 0Z"></path></svg>
+      <h2>Nothing matched that search</h2>
+      <p>Check the spelling or explore all products instead.</p>
+      <a class="btn btn-primary" routerLink="/products">Explore products</a>
+    </div>
   </ng-template>
 </div>

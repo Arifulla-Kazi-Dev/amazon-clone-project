@@ -1,192 +1,282 @@
-/* General Navbar Styling */
-.navbar {
+.site-header {
+  background: #fff;
+  box-shadow: 0 1px 0 var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.announcement {
+  background: var(--ink-950);
+  color: #dce5f5;
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.announcement-content {
   display: flex;
-  align-items: center;
-  background-color: #131921;
-  padding: 10px 20px;
-  color: white;
   justify-content: space-between;
+  padding-block: 8px;
 }
 
-/* Logo */
-.navbar-logo a {
-  color: #ffffff;
-  font-size: 24px;
-  font-weight: bold;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-/* Search Bar */
-.navbar-search {
-  display: flex;
+.nav-main {
   align-items: center;
-  width: 60%;
-  max-width: 700px;
-  background-color: #febd69;
-  border-radius: 4px;
-  overflow: hidden;
-  margin: 0 20px;
+  display: grid;
+  gap: 22px;
+  grid-template-columns: auto minmax(280px, 1fr) auto;
+  padding-block: 16px;
 }
 
-/* Search Category Dropdown */
-.search-category-dropdown {
-  height: 36px;
-  border: none;
-  padding: 0 10px;
-  font-size: 14px;
-  background-color: #f3f3f3;
-  color: #111;
-  border-right: 1px solid #ccc;
-  cursor: pointer;
-  outline: none;
+.brand {
+  align-items: center;
+  color: var(--ink-950);
+  display: inline-flex;
+  font-size: 1.34rem;
+  font-weight: 750;
+  gap: 9px;
+  letter-spacing: -0.045em;
+  white-space: nowrap;
 }
 
-/* Search Input */
-.navbar-search input[type="text"] {
-  width: 100%;
-  padding: 8px;
-  border: none;
-  font-size: 14px;
-  outline: none;
+.brand-mark {
+  align-items: center;
+  background: linear-gradient(140deg, var(--primary), #38bdf8);
+  border-radius: 11px;
+  color: #fff;
+  display: inline-flex;
+  font-size: 1.08rem;
+  height: 38px;
+  justify-content: center;
+  width: 38px;
 }
 
-/* Search Button */
-.navbar-search button {
-  background-color: #febd69;
-  padding: 0 16px;
-  border: none;
-  cursor: pointer;
-  background-image: url('/assets/search-icon.svg'); /* Add icon path */
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 20px;
-  width: 45px;
+.brand-accent {
+  color: var(--primary);
 }
 
-/* Navigation Links */
-.navbar-links {
+.site-search {
+  align-items: stretch;
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: 14px;
   display: flex;
-  list-style: none;
-  gap: 15px;
+  height: 50px;
+  position: relative;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
 }
 
-.navbar-links li {
+.site-search:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+.category-picker {
+  border-right: 1px solid var(--border);
+  flex-shrink: 0;
   position: relative;
 }
 
-.navbar-links a {
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 14px;
-  cursor: pointer;
-  padding: 0 5px;
+.category-trigger {
+  align-items: center;
+  background: #edf2f9;
+  border: 0;
+  border-radius: 14px 0 0 14px;
+  color: var(--ink-600);
+  display: inline-flex;
+  gap: 12px;
+  height: 100%;
+  justify-content: space-between;
+  max-width: 176px;
+  min-width: 122px;
+  padding: 0 12px 0 16px;
 }
 
-.navbar-links a:hover {
-  color: #febd69;
-  text-decoration: underline;
+.category-trigger span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-/* Cart Icon */
-.cart-icon img {
-  width: 30px;
-  height: 30px;
+.category-trigger svg {
+  height: 17px;
+  width: 17px;
+}
+
+.site-search input {
+  background: transparent;
+  border: 0;
+  color: var(--ink-950);
+  flex: 1;
+  min-width: 80px;
+  outline: none;
+  padding: 0 15px;
+}
+
+.site-search input::placeholder {
+  color: #8995a9;
+}
+
+.search-submit {
+  align-items: center;
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  display: inline-flex;
+  justify-content: center;
+  transition: background 180ms ease;
+  width: 54px;
+}
+
+.search-submit:hover {
+  background: var(--primary-dark);
+}
+
+svg {
+  fill: none;
+  height: 22px;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.9;
+  width: 22px;
+}
+
+.nav-actions {
+  align-items: center;
+  display: flex;
+  gap: 15px;
+}
+
+.nav-actions a {
+  color: var(--ink-600);
+  font-size: 0.9rem;
+  font-weight: 550;
+  padding: 10px 0;
+  position: relative;
+  transition: color 180ms ease;
+  white-space: nowrap;
+}
+
+.nav-actions a:hover,
+.nav-actions a.active {
+  color: var(--primary);
+}
+
+.icon-link {
+  align-items: center;
+  display: inline-flex;
+  gap: 5px;
+}
+
+.icon-link svg {
+  height: 21px;
+  width: 21px;
+}
+
+.cart-link {
+  padding-right: 4px !important;
 }
 
 .cart-count {
-  background-color: #f08804;
-  color: #ffffff;
-  padding: 2px 6px;
-  border-radius: 50%;
-  font-size: 12px;
+  align-items: center;
+  background: var(--accent);
+  border: 2px solid #fff;
+  border-radius: 999px;
+  color: #fff;
+  display: inline-flex;
+  font-size: 0.7rem;
+  font-weight: 700;
+  height: 20px;
+  justify-content: center;
+  min-width: 20px;
+  padding: 0 4px;
   position: absolute;
-  top: -5px;
-  right: -10px;
+  right: -8px;
+  top: 1px;
 }
 
-/* Responsive Design */
-
-/* Medium screens (tablets) */
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column; /* Stack elements vertically */
-    align-items: flex-start;
-    padding: 15px;
-  }
-
-  .navbar-logo {
-    margin-bottom: 10px; /* Space below the logo */
-  }
-
-  .navbar-search {
-    width: 100%; /* Expand search bar to full width */
-    margin: 10px 0;
-  }
-
-  .navbar-links {
-    justify-content: center; /* Center navigation links */
-    flex-wrap: wrap; /* Allow wrapping of links */
-    gap: 10px;
-  }
-
-  .navbar-links a {
-    font-size: 12px; /* Adjust font size for compact screens */
-  }
-
-  .cart-icon {
-    margin-top: 10px; /* Space above the cart icon */
-  }
+.menu-toggle {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--ink-800);
+  display: none;
+  height: 44px;
+  justify-content: center;
+  width: 44px;
 }
 
-/* Small screens (mobile) */
-@media (max-width: 480px) {
-  .navbar {
-    padding: 10px; /* Reduce padding for smaller devices */
+.sr-only {
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+}
+
+@media (max-width: 1080px) {
+  .nav-main {
+    gap: 15px;
+    grid-template-columns: auto auto;
   }
 
-  .navbar-logo a {
-    font-size: 20px; /* Reduce logo font size */
+  .menu-toggle {
+    display: inline-flex;
+    grid-column: 2;
+    justify-self: end;
   }
 
-  .navbar-search {
-    margin: 10px 0; /* Maintain spacing around search bar */
+  .site-search {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .nav-actions {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    display: none;
+    flex-direction: column;
+    grid-column: 1 / -1;
+    grid-row: 3;
+    padding: 8px;
+  }
+
+  .nav-actions.open {
+    display: flex;
+  }
+
+  .nav-actions a {
+    padding: 11px 14px;
     width: 100%;
   }
 
-  .search-category-dropdown {
-    font-size: 12px; /* Smaller font size for dropdown */
-    padding: 0 5px; /* Reduce padding */
-  }
-
-  .navbar-search input[type="text"] {
-    font-size: 12px; /* Smaller text input */
-  }
-
-  .navbar-search button {
-    background-size: 16px; /* Smaller search icon */
-    width: 36px; /* Smaller button width */
-  }
-
-  .navbar-links {
-    flex-direction: column; /* Stack links vertically */
-    gap: 8px; /* Adjust spacing */
-    width: 100%; /* Align with navbar width */
-    text-align: center; /* Center-align links */
-  }
-
-  .navbar-links a {
-    font-size: 12px; /* Smaller font size */
-  }
-
-  .cart-icon {
-    margin: 10px 0 0; /* Adjust spacing */
-  }
-
   .cart-count {
-    top: -3px; /* Adjust position */
-    right: -5px;
-    font-size: 10px; /* Smaller badge */
-    padding: 1px 4px; /* Adjust padding */
+    left: 29px;
+    right: auto;
+    top: 2px;
+  }
+}
+
+@media (max-width: 520px) {
+  .announcement-extra {
+    display: none;
+  }
+
+  .nav-main {
+    padding-block: 12px;
+  }
+
+  .category-trigger {
+    max-width: 105px;
+    min-width: 89px;
+    padding-inline: 10px 7px;
+  }
+
+  .site-search input {
+    font-size: 0.9rem;
+    padding-inline: 10px;
   }
 }

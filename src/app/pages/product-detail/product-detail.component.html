@@ -1,9 +1,64 @@
-<p>product-detail works!</p>
-<div *ngIf="product">
-    <div class="product-card" [ngClass]="'product-card-' + product.id">
-        <h2>{{ product.name }}</h2>
-        <p>{{ product.description }}</p>
-        <p>Price: ${{ product.price }}</p>
-        <button (click)="addToCart(product)">Add to Cart</button>
+<div class="page-shell detail-page" *ngIf="product as item; else missingProduct">
+  <nav class="breadcrumbs">
+    <a routerLink="/">Home</a><span>/</span>
+    <a [routerLink]="item.category === 'HomeKitchen' ? '/home-kitchen' : '/' + item.category.toLowerCase()">{{ categoryLabel }}</a><span>/</span>
+    <span>{{ item.name }}</span>
+  </nav>
+
+  <section class="product-detail panel">
+    <div class="detail-media">
+      <span class="badge" *ngIf="item.badge">{{ item.badge }}</span>
+      <img [src]="item.image" [alt]="item.name" width="560" height="540" (error)="showFallbackImage($event)">
     </div>
+    <div class="detail-content">
+      <p class="eyebrow">{{ categoryLabel }}</p>
+      <h1>{{ item.name }}</h1>
+      <div class="rating">
+        <span>&#9733;</span>
+        <strong>{{ item.rating | number: '1.1-1' }}</strong>
+        <small>{{ item.reviewCount }} verified reviews</small>
+      </div>
+      <p class="description">{{ item.description }}</p>
+      <div class="price-row">
+        <strong>{{ item.price | currency: 'INR': 'symbol': '1.0-0' }}</strong>
+        <del *ngIf="item.previousPrice">{{ item.previousPrice | currency: 'INR': 'symbol': '1.0-0' }}</del>
+      </div>
+      <p class="stock"><span></span> In stock and ready to ship</p>
+      <div class="purchase">
+        <label>
+          Quantity
+          <select class="field" [(ngModel)]="quantity">
+            <option *ngFor="let count of [1, 2, 3, 4, 5]" [value]="count">{{ count }}</option>
+          </select>
+        </label>
+        <button class="btn btn-primary" type="button" (click)="addToCart(item)">Add to cart</button>
+        <a class="btn btn-outline" routerLink="/cart">View cart</a>
+      </div>
+      <p class="added" *ngIf="addedMessage">{{ addedMessage }}</p>
+      <div class="promises">
+        <p><strong>Free delivery</strong><span>Arrives in 2-4 business days</span></p>
+        <p><strong>30-day returns</strong><span>Simple, convenient refunds</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="related" *ngIf="relatedProducts.length">
+    <div class="related-title">
+      <h2>You may also like</h2>
+      <a routerLink="/products">Shop all &rarr;</a>
+    </div>
+    <div class="product-grid">
+      <app-product-card *ngFor="let related of relatedProducts" [product]="related" (addToCart)="addRelatedProduct($event)"></app-product-card>
+    </div>
+  </section>
 </div>
+
+<ng-template #missingProduct>
+  <div class="page-shell missing">
+    <div class="empty-state">
+      <h1>Product not found</h1>
+      <p>This product is no longer available in the current collection.</p>
+      <a class="btn btn-primary" routerLink="/products">Return to products</a>
+    </div>
+  </div>
+</ng-template>

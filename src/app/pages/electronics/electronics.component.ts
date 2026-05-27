@@ -1,33 +1,27 @@
-// src/app/components/electronics/electronics.component.ts
-import { Component, OnInit } from '@angular/core';
-import { Product } from '../../models/product.model';
-import { ProductService } from '../../services/product.services';
-import { CartService } from '../../services/cart.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { ProductCardComponent } from "../../shared/product-card/product-card.component";
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { Product } from '../../models/product.model';
+import { CartService } from '../../services/cart.service';
+import { ProductService } from '../../services/product.services';
+import { ProductCardComponent } from '../../shared/product-card/product-card.component';
 
 @Component({
-    selector: 'app-electronics',
-    imports: [CommonModule, FormsModule, ProductCardComponent],
-    templateUrl: './electronics.component.html',
-    styleUrls: ['./electronics.component.css']
+  selector: 'app-electronics',
+  imports: [CommonModule, RouterLink, ProductCardComponent],
+  templateUrl: './electronics.component.html',
+  styleUrls: ['./electronics.component.css']
 })
-export class ElectronicsComponent implements OnInit {
-  electronicsProducts: Product[] = [];
+export class ElectronicsComponent {
+  readonly title = 'Electronics';
+  readonly description = 'Upgrade your daily routine with connected devices and premium entertainment.';
+  readonly products: Product[];
 
-  constructor(private productService: ProductService, private cartService: CartService) {}
-
-  ngOnInit(): void {
-    this.loadElectronicsProducts();
-  }
-
-  private loadElectronicsProducts(): void {
-    this.electronicsProducts = this.productService.getProductsByCategory('Electronics');
+  constructor(productService: ProductService, private cartService: CartService) {
+    this.products = productService.getProductsByCategory('Electronics');
   }
 
   addToCart(product: Product): void {
-    this.cartService.addToCart(product); 
-    console.log("Product added to cart:", product);
+    this.cartService.addToCart(product);
   }
 }

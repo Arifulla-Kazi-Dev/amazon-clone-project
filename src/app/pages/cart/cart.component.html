@@ -1,23 +1,60 @@
-<div *ngIf="cartItems.length > 0; else emptyCart">
-  <div *ngFor="let item of cartItems" class="cart-item">
-    <!-- Product Image as <img> -->
-    <img [src]="item.image" alt="{{ item.name }}" class="cart-item-image" />
+<div class="page-shell cart-page">
+  <header class="cart-header">
+    <p class="eyebrow">Your selection</p>
+    <h1 class="page-title">Shopping cart</h1>
+  </header>
 
-    <!-- Product Details -->
-    <div class="cart-item-details">
-      <p>{{ item.name }} - ${{ item.price }}</p>
-      <button (click)="removeFromCart(item.id)">Remove</button>
-    </div>
+  <div class="cart-layout" *ngIf="cartItems.length; else emptyCart">
+    <section class="cart-items panel" aria-label="Cart items">
+      <div class="items-title">
+        <h2>{{ itemCount }} item{{ itemCount === 1 ? '' : 's' }}</h2>
+        <button type="button" (click)="clearCart()">Clear cart</button>
+      </div>
+
+      <article class="cart-item" *ngFor="let item of cartItems">
+        <a [routerLink]="['/product', item.id]" class="cart-image">
+          <img [src]="item.image" [alt]="item.name" width="132" height="142" loading="lazy" decoding="async" (error)="showFallbackImage($event)">
+        </a>
+        <div class="item-details">
+          <p class="category">{{ item.category === 'HomeKitchen' ? 'Home & Kitchen' : item.category }}</p>
+          <a class="item-name" [routerLink]="['/product', item.id]">{{ item.name }}</a>
+          <p class="availability">In stock &middot; Ships within 24 hours</p>
+          <button class="remove" type="button" (click)="removeFromCart(item.id)">Remove</button>
+        </div>
+        <div class="item-actions">
+          <strong>{{ item.price * item.quantity | currency: 'INR': 'symbol': '1.0-0' }}</strong>
+          <div class="quantity" aria-label="Quantity controls">
+            <button type="button" (click)="decrease(item)" [attr.aria-label]="'Decrease quantity of ' + item.name">&minus;</button>
+            <span>{{ item.quantity }}</span>
+            <button type="button" (click)="increase(item)" [attr.aria-label]="'Increase quantity of ' + item.name">+</button>
+          </div>
+          <small>{{ item.price | currency: 'INR': 'symbol': '1.0-0' }} each</small>
+        </div>
+      </article>
+    </section>
+
+    <aside class="summary panel">
+      <h2>Order summary</h2>
+      <div class="summary-line"><span>Subtotal</span><strong>{{ subtotal | currency: 'INR': 'symbol': '1.0-0' }}</strong></div>
+      <div class="summary-line"><span>Delivery</span><strong [class.free]="delivery === 0">{{ delivery === 0 ? 'Free' : (delivery | currency: 'INR': 'symbol': '1.0-0') }}</strong></div>
+      <div class="summary-line"><span>GST (estimated)</span><strong>{{ estimatedTax | currency: 'INR': 'symbol': '1.0-0' }}</strong></div>
+      <div class="summary-total"><span>Total</span><strong>{{ total | currency: 'INR': 'symbol': '1.0-0' }}</strong></div>
+      <p class="saving" *ngIf="delivery === 0">You qualify for free standard delivery.</p>
+      <button class="btn btn-primary checkout" type="button" (click)="onProceedToBuy()">Continue to checkout</button>
+      <a class="continue" routerLink="/products">&larr; Continue shopping</a>
+      <div class="secure">
+        <svg viewBox="0 0 24 24"><path d="M7 11V8a5 5 0 0 1 10 0v3M5 11h14v10H5z"></path></svg>
+        Secure checkout experience
+      </div>
+    </aside>
   </div>
 
-  <!-- Total Price and Clear Cart Button -->
-  <p>Total: ${{ total }}</p>
-  <button (click)="clearCart()">Clear Cart</button>
-  
-  <!-- Proceed to Buy Button -->
-  <button class="proceed-to-buy" (click)="onProceedToBuy()">Proceed to Buy</button>
+  <ng-template #emptyCart>
+    <div class="empty-state empty-cart">
+      <svg viewBox="0 0 24 24"><path d="M3 4h2l2.6 11h10.8l2.1-8H6m3 12a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm10 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>
+      <h2>Your cart is waiting</h2>
+      <p>Add a few products and they will appear here, ready for checkout.</p>
+      <a class="btn btn-primary" routerLink="/products">Start shopping</a>
+    </div>
+  </ng-template>
 </div>
-
-<ng-template #emptyCart>
-  <p>Your cart is empty.</p>
-</ng-template>

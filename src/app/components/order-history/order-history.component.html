@@ -1,11 +1,13 @@
-<div class="order-history">
-    <h2>Your Order History</h2>
-    <div *ngFor="let order of orders" class="order-item">
-      <h3>Order ID: {{ order.id }}</h3>
-      <p>Date: {{ order.date }}</p>
-      <p>Status: {{ order.status }}</p>
-      <p>Total: ${{ order.total }}</p>
-      <button (click)="viewOrderDetails(order.id)">View Details</button>
+<section class="order-history panel">
+  <h2>Your order history</h2>
+  <article *ngFor="let order of orders">
+    <div>
+      <strong>Order #{{ order.id }}</strong>
+      <span>{{ order.date }}</span>
     </div>
-  </div>
-  
+    <span class="status">{{ order.status }}</span>
+    <strong>{{ order.total | currency: 'INR': 'symbol': '1.0-0' }}</strong>
+    <button type="button" (click)="viewOrderDetails(order.id)">View details</button>
+    <p *ngIf="selectedOrderId === order.id">Tracking and item details are available in this order summary.</p>
+  </article>
+</section>

@@ -1,29 +1,58 @@
-<nav class="navbar">
-  <!-- Logo -->
-  <div class="navbar-logo">
-    <a (click)="navigateHome()">Amazon</a>
+<header class="site-header">
+  <div class="announcement">
+    <div class="page-shell announcement-content">
+      <span>Free delivery on orders over &#8377;999</span>
+      <span class="announcement-extra">Simple returns for 30 days</span>
+    </div>
   </div>
 
-  <!-- Search Bar -->
-  <!-- Search form -->
-<form (submit)="onSearch(searchInput.value); $event.preventDefault()">
-  <input #searchInput type="text" placeholder="Search products" />
-  <button type="submit">Search</button>
-</form>
+  <div class="page-shell nav-main">
+    <a class="brand" routerLink="/" aria-label="NovaCart home" (click)="closeMenu()">
+      <span class="brand-mark">N</span>
+      <span>Nova<span class="brand-accent">Cart</span></span>
+    </a>
 
+    <button class="menu-toggle" type="button" (click)="toggleMenu()" [attr.aria-expanded]="isMenuOpen" aria-label="Toggle navigation">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 7h16M4 12h16M4 17h16"></path>
+      </svg>
+    </button>
 
-  <!-- Navigation Links -->
-  <ul class="navbar-links">
-    <li *ngFor="let category of categories">
-      <a (click)="navigateToCategory(category.route)">{{ category.name }}</a>
-    </li>
-    <li><a (click)="navigateToAccount()">Account</a></li>
-    <li class="cart-icon" (click)="goToCart()">
-      <!-- Add an icon or text for the cart -->
-      <img src="/assets/cart-icon.jpg" alt="Cart" />
-      <span *ngIf="cartItemCount > 0" class="cart-count">{{ cartItemCount }}</span>
-    </li>
-    
-  </ul>
-</nav>
+    <form class="site-search" (ngSubmit)="onSearch()" role="search">
+      <div class="category-picker">
+        <button class="category-trigger" type="button" (click)="toggleCategoryMenu()" [attr.aria-expanded]="isCategoryMenuOpen" aria-haspopup="listbox" aria-label="Choose department">
+          <span>{{ selectedCategoryLabel }}</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"></path></svg>
+        </button>
+        <div class="category-menu" *ngIf="isCategoryMenuOpen" role="listbox" aria-label="Departments">
+          <button type="button" role="option" [class.selected]="!selectedCategory" [attr.aria-selected]="!selectedCategory" (click)="selectCategory('')">All departments</button>
+          <button *ngFor="let category of categories" type="button" role="option" [class.selected]="selectedCategory === category.value" [attr.aria-selected]="selectedCategory === category.value" (click)="selectCategory(category.value)">{{ category.name }}</button>
+        </div>
+      </div>
+      <label class="sr-only" for="product-search">Search products</label>
+      <input id="product-search" [(ngModel)]="searchTerm" name="query" type="search" placeholder="Search products, categories and essentials" autocomplete="off" (focus)="closeCategoryMenu()">
+      <button class="search-submit" type="submit" aria-label="Search">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m21 21-4.7-4.7m2-5.05a7.05 7.05 0 1 1-14.1 0 7.05 7.05 0 0 1 14.1 0Z"></path>
+        </svg>
+      </button>
+    </form>
 
+    <nav class="nav-actions" [class.open]="isMenuOpen" aria-label="Main navigation">
+      <a *ngFor="let category of categories" [routerLink]="category.route" routerLinkActive="active" (click)="closeMenu()">{{ category.name }}</a>
+      <a class="icon-link" routerLink="/account" routerLinkActive="active" (click)="closeMenu()">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 21a8 8 0 0 0-16 0m12-13a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"></path>
+        </svg>
+        <span>Account</span>
+      </a>
+      <a class="icon-link cart-link" routerLink="/cart" routerLinkActive="active" (click)="closeMenu()" aria-label="Shopping cart">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 4h2l2.6 11h10.8l2.1-8H6m3 12a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm10 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path>
+        </svg>
+        <span>Cart</span>
+        <span class="cart-count" *ngIf="cartItemCount$ | async as count">{{ count }}</span>
+      </a>
+    </nav>
+  </div>
+</header>

@@ -1,31 +1,69 @@
-<div class="payment-form">
-    <h2>Payment Details</h2>
-    <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="cardNumber">Card Number</label>
-        <input type="text" id="cardNumber" formControlName="cardNumber" placeholder="Enter card number" />
-        <div *ngIf="paymentForm.get('cardNumber')?.invalid && paymentForm.get('cardNumber')?.touched">
-          Card number is required and must be 16 digits.
-        </div>
-      </div>
-  
-      <div class="form-group">
-        <label for="expirationDate">Expiration Date</label>
-        <input type="text" id="expirationDate" formControlName="expirationDate" placeholder="MM/YY" />
-        <div *ngIf="paymentForm.get('expirationDate')?.invalid && paymentForm.get('expirationDate')?.touched">
-          Expiration date is required.
-        </div>
-      </div>
-  
-      <div class="form-group">
-        <label for="cvv">CVV</label>
-        <input type="text" id="cvv" formControlName="cvv" placeholder="Enter CVV" />
-        <div *ngIf="paymentForm.get('cvv')?.invalid && paymentForm.get('cvv')?.touched">
-          CVV is required and must be 3 digits.
-        </div>
-      </div>
-  
-      <button type="submit" [disabled]="!paymentForm.valid">Submit Payment</button>
-    </form>
+<div class="page-shell payment-page">
+  <div class="payment-success panel" *ngIf="isComplete; else paymentTemplate">
+    <div class="check"><svg viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"></path></svg></div>
+    <p class="eyebrow">Order confirmed</p>
+    <h1>Thanks for your order</h1>
+    <p>Your demo order <strong>{{ orderReference }}</strong> has been placed successfully.</p>
+    <p class="charged">Order items total: {{ orderTotal | currency: 'INR': 'symbol': '1.0-0' }}</p>
+    <div class="success-actions">
+      <a class="btn btn-primary" routerLink="/products">Continue shopping</a>
+      <a class="btn btn-outline" routerLink="/account">View account</a>
+    </div>
   </div>
-  
+
+  <ng-template #paymentTemplate>
+    <div class="payment-layout" *ngIf="hasCartItems; else noOrderToPay">
+      <section>
+        <p class="eyebrow">Final step</p>
+        <h1 class="page-title">Payment details</h1>
+        <p class="muted intro">Complete your checkout in this interface demo.</p>
+
+        <form class="payment-form panel" [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+          <div class="demo-note">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"></path></svg>
+            Demo only. Do not enter real payment information.
+          </div>
+          <label>
+            Name on card
+            <input class="field" type="text" formControlName="nameOnCard" placeholder="Alex Taylor">
+            <small *ngIf="paymentForm.get('nameOnCard')?.invalid && paymentForm.get('nameOnCard')?.touched">Enter the name on the card.</small>
+          </label>
+          <label>
+            Card number
+            <input class="field" type="text" inputmode="numeric" formControlName="cardNumber" placeholder="1111222233334444">
+            <small *ngIf="paymentForm.get('cardNumber')?.invalid && paymentForm.get('cardNumber')?.touched">Use 16 numeric digits for the demo.</small>
+          </label>
+          <div class="row">
+            <label>
+              Expiration
+              <input class="field" type="text" formControlName="expirationDate" placeholder="MM/YY">
+              <small *ngIf="paymentForm.get('expirationDate')?.invalid && paymentForm.get('expirationDate')?.touched">Use MM/YY.</small>
+            </label>
+            <label>
+              Security code
+              <input class="field" type="text" inputmode="numeric" formControlName="cvv" placeholder="123">
+              <small *ngIf="paymentForm.get('cvv')?.invalid && paymentForm.get('cvv')?.touched">Use 3 digits.</small>
+            </label>
+          </div>
+          <button class="btn btn-primary" type="submit">Place demo order</button>
+        </form>
+      </section>
+
+      <aside class="reassurance panel">
+        <h2>Protected checkout</h2>
+        <p>Payment details are never sent to a gateway in this frontend exploration.</p>
+        <div><strong>Secure experience</strong><span>Designed with privacy in mind</span></div>
+        <div><strong>Simple returns</strong><span>30 days after delivery</span></div>
+        <div><strong>Need help?</strong><span>support&#64;novacart.example</span></div>
+        <a routerLink="/cart">&larr; Return to cart</a>
+      </aside>
+    </div>
+    <ng-template #noOrderToPay>
+      <div class="empty-state payment-empty">
+        <h1>No order to pay for</h1>
+        <p>Your cart is empty. Discover products before starting checkout.</p>
+        <a class="btn btn-primary" routerLink="/products">Explore products</a>
+      </div>
+    </ng-template>
+  </ng-template>
+</div>

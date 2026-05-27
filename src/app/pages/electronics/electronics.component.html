@@ -1,7 +1,18 @@
-<div class="category-container">
-    <h2>Electronics</h2>
-    <div class="product-grid">
-      <app-product-card *ngFor="let product of electronicsProducts" [product]="product" (addToCart)="addToCart(product)"></app-product-card>
+<div class="page-shell category-page">
+  <nav class="breadcrumbs"><a routerLink="/">Home</a><span>/</span>{{ title }}</nav>
+  <header class="category-hero">
+    <div>
+      <p class="eyebrow">Department</p>
+      <h1 class="page-title">{{ title }}</h1>
+      <p>{{ description }}</p>
     </div>
+    <a class="btn btn-outline" routerLink="/products">All products</a>
+  </header>
+  <div class="category-toolbar">
+    <p><strong>{{ products.length }}</strong> products in {{ title }}</p>
+    <span>Free delivery on eligible orders</span>
   </div>
-  
+  <div class="product-grid">
+    <app-product-card *ngFor="let product of products" [product]="product" (addToCart)="addToCart($event)"></app-product-card>
+  </div>
+</div>

@@ -1,46 +1,54 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'; // Import Router for navigation
-import { FormsModule } from '@angular/forms';
-import { ProductCardComponent } from "../../shared/product-card/product-card.component";
-import { CartService } from '../../services/cart.service'; // Import CartService
-import { Product } from '../../models/product.model'; // Import Product model
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { Product } from '../../models/product.model';
+import { CartService } from '../../services/cart.service';
+import { ProductService } from '../../services/product.services';
+import { ProductCardComponent } from '../../shared/product-card/product-card.component';
 
 @Component({
-    selector: 'app-home',
-    imports: [CommonModule, FormsModule, ProductCardComponent],
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.css']
+  selector: 'app-home',
+  imports: [CommonModule, RouterLink, ProductCardComponent],
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
-  categories = [
-    { name: 'Electronics', route: '/electronics' },
-    { name: 'Fashion', route: '/fashion' },
-    { name: 'Kitchen', route: '/home-kitchen' }
+export class HomeComponent {
+  readonly categories = [
+    {
+      name: 'Electronics',
+      route: '/electronics',
+      image: '/assets/products/electronics.jpg',
+      description: 'Smart tech and sound'
+    },
+    {
+      name: 'Fashion',
+      route: '/fashion',
+      image: '/assets/products/fashion.jpg',
+      description: 'Everyday style edits'
+    },
+    {
+      name: 'Home & Kitchen',
+      route: '/home-kitchen',
+      image: '/assets/products/home-kitchen.jpg',
+      description: 'Upgrade your space'
+    }
   ];
 
-  featuredProducts: Product[] = [
-    { id: 1, name: 'Boult Audio UFO', price: 100, description: 'Wireless Gaming Earbuds with 13mm BoomX Drivers', quantity: 1, category: 'Electronics', image: 'https://i.ibb.co/qBsC5Px/Boult.jpg' },
-    { id: 2, name: 'Asus VivoBook 15 Pro OLED', price: 150, description: 'Lighting up your creativity.', quantity: 1, category: 'Electronics', image: 'https://i.ibb.co/Jzy96SY/Asus.jpg' },
-    { id: 3, name: 'Coffee Maker', price: 79, description: 'AGARO Primo Drip Coffee Maker, Brew & Drip Coffee Maker.', quantity: 1, category: 'Home & Kitchen', image: 'https://i.ibb.co/YW1PB8J/Coffee.jpg' },
-    // Add more products and assign appropriate categories
-  ];
+  readonly featuredProducts: Product[];
+  readonly dailyProducts: Product[];
 
-  constructor(private cartService: CartService, private router: Router) {} // Inject CartService and Router
+  constructor(private cartService: CartService, productService: ProductService) {
+    const products = productService.getProducts();
+    this.featuredProducts = products.filter(product => [3, 7, 10, 14].includes(product.id));
+    this.dailyProducts = products.filter(product => [1, 6, 12, 16].includes(product.id));
+  }
 
-  ngOnInit(): void {}
-
-  // Add product to cart
   addToCart(product: Product): void {
     this.cartService.addToCart(product);
   }
 
-  onCategoryClick(categoryRoute: string): void {
-    console.log(`Navigating to category: ${categoryRoute}`);
-    this.router.navigate([categoryRoute]); // Navigate to the route defined in categories
-  }
-
-  formatCategoryName(categoryName: string): string {
-    return categoryName.toLowerCase().replace(/ /g, '');
+  showFallbackImage(event: Event): void {
+    const image = event.target as HTMLImageElement;
+    image.src = '/assets/product-placeholder.svg';
   }
 }

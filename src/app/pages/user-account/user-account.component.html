@@ -1,53 +1,81 @@
-<div class="user-account">
-  <h1>My Account</h1>
-
-  <!-- Personal Information Section -->
-  <section class="personal-info">
-    <h2>Personal Information</h2>
-    <div *ngIf="!editMode; else editTemplate">
-      <p><strong>Name:</strong> {{ user.name }}</p>
-      <p><strong>Email:</strong> {{ user.email }}</p>
-      <p><strong>Phone:</strong> {{ user.phone }}</p>
-      <p><strong>Address:</strong> {{ user.address }}</p>
-      <button (click)="toggleEditMode()">Edit</button>
+<div class="page-shell account-page">
+  <header class="account-header">
+    <div>
+      <p class="eyebrow">Welcome back</p>
+      <h1 class="page-title">My account</h1>
     </div>
-    <ng-template #editTemplate>
-      <form (ngSubmit)="savePersonalInfo()">
-        <label>Name: <input [(ngModel)]="user.name" name="name" /></label>
-        <label>Email: <input [(ngModel)]="user.email" name="email" type="email" /></label>
-        <label>Phone: <input [(ngModel)]="user.phone" name="phone" /></label>
+    <span class="member-pill">{{ user.subscriptionStatus }}</span>
+  </header>
 
-        <!-- Address Form Component -->
-        <app-address-form [addressData]="userAddress" (addressSubmitted)="onAddressUpdate($event)"></app-address-form>
+  <p class="notice" *ngIf="notice">{{ notice }}</p>
 
-        <button type="submit">Save</button>
-        <button type="button" (click)="toggleEditMode()">Cancel</button>
-      </form>
-    </ng-template>
-  </section>
+  <div class="account-layout">
+    <aside class="profile panel">
+      <div class="avatar">{{ user.name.charAt(0) }}</div>
+      <h2>{{ user.name }}</h2>
+      <p>{{ user.email }}</p>
+      <nav>
+        <button type="button" [class.selected]="activeSection === 'profile'" (click)="goToSection('profile')">Profile</button>
+        <button type="button" [class.selected]="activeSection === 'orders'" (click)="goToSection('orders')">Orders</button>
+        <button type="button" [class.selected]="activeSection === 'addresses'" (click)="goToSection('addresses')">Addresses</button>
+        <button type="button" [class.selected]="activeSection === 'preferences'" (click)="goToSection('preferences')">Preferences</button>
+      </nav>
+    </aside>
 
-  <!-- Order History Section -->
-  <section class="order-history">
-    <h2>Order History</h2>
-    <div *ngIf="user.orders.length > 0; else noOrders">
-      <div *ngFor="let order of user.orders" class="order-item">
-        <p><strong>Order ID:</strong> {{ order.id }}</p>
-        <p><strong>Date:</strong> {{ order.date }}</p>
-        <p><strong>Total:</strong> {{ order.total | currency }}</p>
-        <button (click)="viewOrder(order.id)">View Details</button>
-      </div>
-    </div>
-    <ng-template #noOrders>
-      <p>No orders available.</p>
-    </ng-template>
-  </section>
+    <main class="account-content">
+      <section class="panel account-card account-anchor" id="account-profile">
+        <div class="card-title">
+          <h2>Personal information</h2>
+          <button type="button" class="text-button" (click)="toggleEditMode()">{{ editMode ? 'Cancel' : 'Edit' }}</button>
+        </div>
+        <div class="info-grid" *ngIf="!editMode; else editTemplate">
+          <p><span>Full name</span>{{ user.name }}</p>
+          <p><span>Email</span>{{ user.email }}</p>
+          <p><span>Phone</span>{{ user.phone }}</p>
+        </div>
+        <ng-template #editTemplate>
+          <form class="edit-form" (ngSubmit)="savePersonalInfo()">
+            <label>Full name<input class="field" [(ngModel)]="user.name" name="name" required></label>
+            <label>Email address<input class="field" [(ngModel)]="user.email" name="email" type="email" required></label>
+            <label>Phone<input class="field" [(ngModel)]="user.phone" name="phone" required></label>
+            <button class="btn btn-primary" type="submit">Save changes</button>
+          </form>
+        </ng-template>
+      </section>
 
-  <!-- Account Settings Section -->
-  <section class="account-settings">
-    <h2>Account Settings</h2>
-    <p><strong>Subscription Status:</strong> {{ user.subscriptionStatus }}</p>
-    <p><strong>Notifications:</strong> {{ user.notificationsEnabled ? 'Enabled' : 'Disabled' }}</p>
-    <button (click)="toggleNotifications()">{{ user.notificationsEnabled ? 'Disable' : 'Enable' }} Notifications</button>
-    <button (click)="changePassword()">Change Password</button>
-  </section>
+      <section class="panel account-card account-anchor" id="account-addresses">
+        <div class="card-title">
+          <h2>Delivery address</h2>
+          <button type="button" class="text-button" (click)="toggleAddressEdit()">{{ addressEditMode ? 'Cancel' : 'Update' }}</button>
+        </div>
+        <p class="address" *ngIf="!addressEditMode">{{ user.address }}</p>
+        <app-address-form *ngIf="addressEditMode" [addressData]="userAddress" (addressSubmitted)="onAddressUpdate($event)"></app-address-form>
+      </section>
+
+      <section class="panel account-card orders account-anchor" id="account-orders">
+        <div class="card-title"><h2>Recent orders</h2><span class="order-count">{{ user.orders.length }} orders</span></div>
+        <article *ngFor="let order of user.orders">
+          <div>
+            <strong>{{ order.id }}</strong>
+            <span>{{ order.date }}</span>
+          </div>
+          <span class="status">{{ order.status }}</span>
+          <strong>{{ order.total | currency: 'INR': 'symbol': '1.0-0' }}</strong>
+          <button type="button" (click)="viewOrder(order.id)">Details</button>
+        </article>
+      </section>
+
+      <section class="panel account-card settings account-anchor" id="account-preferences">
+        <h2>Preferences</h2>
+        <div>
+          <p><strong>Shopping updates</strong><span>{{ user.notificationsEnabled ? 'Receive order and offer updates' : 'Updates currently paused' }}</span></p>
+          <button class="btn btn-outline" type="button" (click)="toggleNotifications()">{{ user.notificationsEnabled ? 'Pause' : 'Enable' }}</button>
+        </div>
+        <div>
+          <p><strong>Password</strong><span>Last changed 3 months ago</span></p>
+          <button class="btn btn-outline" type="button" (click)="changePassword()">Change</button>
+        </div>
+      </section>
+    </main>
+  </div>
 </div>

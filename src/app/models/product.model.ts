@@ -1,5 +1,4 @@
 export interface Product {
-
   quantity: number;
   id: number;
   name: string;
@@ -7,6 +6,9 @@ export interface Product {
   description: string;
   category: string;
   productId?: string;
-  image: string; 
-  
+  image: string;
+  rating?: number;
+  reviewCount?: number;
+  previousPrice?: number;
+  badge?: string;
 }

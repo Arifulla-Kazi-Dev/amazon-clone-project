@@ -1,37 +1,85 @@
-<div class="container">
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="hero-text">
-        <h1>Welcome to Our Store!</h1>
-        <p>Find the best products at unbeatable prices.</p>
-        <a routerLink="/products" class="shop-now-btn">Shop Now</a>
+<div class="page-shell home">
+  <section class="hero" aria-label="Featured collection">
+    <img class="hero-image" src="/assets/products/banner.jpg" alt="" fetchpriority="high" (error)="showFallbackImage($event)">
+    <div class="hero-copy">
+      <p class="eyebrow">New season essentials</p>
+      <h1>Discover better things for everyday living.</h1>
+      <p class="hero-description">Curated tech, home upgrades, and style picks delivered with speed and simplicity.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" routerLink="/products">Shop collection</a>
+        <a class="btn hero-secondary" routerLink="/electronics">Explore tech</a>
       </div>
-    </section>
-  
-    <!-- Categories Section -->
-    <section class="categories">
-      <h2>Shop by Category</h2>
-      <div class="category-list">
-        <div 
-          *ngFor="let category of categories" 
-          class="category-card" 
-          [ngClass]="formatCategoryName(category.name)"
-          (click)="onCategoryClick(category.route)">
+    </div>
+    <div class="hero-offer">
+      <span>Today only</span>
+      <strong>Up to 25% off</strong>
+      <p>Selected arrivals</p>
+    </div>
+  </section>
+
+  <section class="service-row" aria-label="Store benefits">
+    <div>
+      <svg viewBox="0 0 24 24"><path d="M3 7h11v10H3zm11 4h4l3 3v3h-7zM7 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm10 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"></path></svg>
+      <p><strong>Fast delivery</strong><span>Free above &#8377;999</span></p>
+    </div>
+    <div>
+      <svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"></path></svg>
+      <p><strong>Easy returns</strong><span>30-day promise</span></p>
+    </div>
+    <div>
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"></path></svg>
+      <p><strong>Secure payment</strong><span>Protected checkout</span></p>
+    </div>
+    <div>
+      <svg viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2M6 18H5a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2h1zm12 0h1a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2h-1z"></path></svg>
+      <p><strong>Always here</strong><span>Friendly support</span></p>
+    </div>
+  </section>
+
+  <section class="home-section">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Browse departments</p>
+        <h2>Shop by category</h2>
+      </div>
+      <a routerLink="/products">View all products <span>&rarr;</span></a>
+    </div>
+    <div class="category-grid">
+      <a class="category-card" *ngFor="let category of categories" [routerLink]="category.route">
+        <img [src]="category.image" [alt]="category.name" width="420" height="235" loading="lazy" decoding="async" (error)="showFallbackImage($event)">
+        <div>
           <h3>{{ category.name }}</h3>
+          <p>{{ category.description }}</p>
+          <span>Shop now &rarr;</span>
         </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="home-section">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Picked for you</p>
+        <h2>Trending this week</h2>
       </div>
-    </section>
-  
-    <!-- Featured Products Section -->
-    <section class="featured-products">
-      <h2>Featured Products</h2>
-      <div class="product-grid">
-        <app-product-card
-          *ngFor="let product of featuredProducts"
-          [product]="product"
-          (addToCart)="addToCart($event)">
-        </app-product-card>
-      </div>
-    </section>
-  </div>
-  
+      <a routerLink="/products">Browse catalog <span>&rarr;</span></a>
+    </div>
+    <div class="product-grid">
+      <app-product-card *ngFor="let product of featuredProducts" [product]="product" (addToCart)="addToCart($event)"></app-product-card>
+    </div>
+  </section>
+
+  <section class="edit-banner">
+    <div>
+      <p class="eyebrow">Everyday refresh</p>
+      <h2>Small upgrades. Noticeable comfort.</h2>
+      <p>Practical finds for home, commute, and weekend plans.</p>
+    </div>
+    <div class="mini-products">
+      <a *ngFor="let product of dailyProducts" [routerLink]="['/product', product.id]">
+        <img [src]="product.image" [alt]="product.name" loading="lazy" decoding="async" (error)="showFallbackImage($event)">
+        <span>{{ product.name }}</span>
+      </a>
+    </div>
+  </section>
+</div>

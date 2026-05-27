@@ -1,0 +1,83 @@
+.admin-page {
+  padding-block: clamp(30px, 5vw, 52px);
+}
+
+header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  margin-top: 7px;
+}
+
+.admin-nav {
+  display: flex;
+  gap: 7px;
+  margin-bottom: 25px;
+  padding: 7px;
+}
+
+.admin-nav a {
+  border-radius: 9px;
+  color: var(--ink-600);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 11px 20px;
+}
+
+.admin-nav .active {
+  background: var(--surface-tint);
+  color: var(--primary);
+}
+
+.metrics {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(4, 1fr);
+  margin-bottom: 27px;
+}
+
+.metrics div {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 21px;
+}
+
+.metrics span {
+  color: var(--ink-600);
+  font-size: 0.82rem;
+}
+
+.metrics strong {
+  font-size: 1.72rem;
+  letter-spacing: -0.04em;
+}
+
+.metrics small {
+  color: var(--success);
+  font-size: 0.76rem;
+}
+
+@media (max-width: 850px) {
+  .metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .admin-nav a {
+    flex: 1;
+    padding-inline: 8px;
+    text-align: center;
+  }
+}

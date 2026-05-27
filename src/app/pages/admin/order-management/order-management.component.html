@@ -1,1 +1,13 @@
-<p>order-management works!</p>
+<section class="orders panel">
+  <div class="section-top">
+    <div><h2>Recent orders</h2><p>Track fulfillment and customer delivery status.</p></div>
+    <button class="btn btn-outline" type="button">Export</button>
+  </div>
+  <article *ngFor="let order of orders">
+    <strong>{{ order.number }}</strong>
+    <div><b>{{ order.customer }}</b><span>{{ order.date }}</span></div>
+    <strong>{{ order.total | currency: 'INR': 'symbol': '1.0-0' }}</strong>
+    <span class="status" [class.delivered]="order.status === 'Delivered'">{{ order.status }}</span>
+    <button type="button">View</button>
+  </article>
+</section>

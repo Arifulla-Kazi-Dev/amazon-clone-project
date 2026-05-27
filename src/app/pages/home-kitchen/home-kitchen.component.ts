@@ -1,35 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { Product } from '../../models/product.model';
-import { ProductService } from '../../services/product.services'; // Ensure correct file name
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { ProductCardComponent } from "../../shared/product-card/product-card.component";
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { Product } from '../../models/product.model';
 import { CartService } from '../../services/cart.service';
-
+import { ProductService } from '../../services/product.services';
+import { ProductCardComponent } from '../../shared/product-card/product-card.component';
 
 @Component({
-    selector: 'app-HomeKitchen',
-    imports: [CommonModule, FormsModule, ProductCardComponent],
-    templateUrl: './home-kitchen.component.html',
-    styleUrl: './home-kitchen.component.css' // Changed to styleUrls
+  selector: 'app-home-kitchen',
+  imports: [CommonModule, RouterLink, ProductCardComponent],
+  templateUrl: './home-kitchen.component.html',
+  styleUrl: './home-kitchen.component.css'
 })
-export class HomeKitchenComponent implements OnInit {
-  HomeKitchenProducts: Product[] = [];
+export class HomeKitchenComponent {
+  readonly title = 'Home & Kitchen';
+  readonly description = 'Make daily routines simpler with practical, beautifully designed home upgrades.';
+  readonly products: Product[];
 
-  constructor(private productService: ProductService, private cartService: CartService) {}
-
-  ngOnInit(): void {
-    this.loadHomeKitchenProducts();
-  }
-
-  private loadHomeKitchenProducts(): void {
-    this.HomeKitchenProducts = this.productService['getProductsByCategory']('HomeKitchen');
-    console.log(this.HomeKitchenProducts); // Add this to verify it returns products
+  constructor(productService: ProductService, private cartService: CartService) {
+    this.products = productService.getProductsByCategory('HomeKitchen');
   }
 
   addToCart(product: Product): void {
-    this.cartService.addToCart(product); 
-    console.log("Product added to cart:", product);
+    this.cartService.addToCart(product);
   }
-
 }

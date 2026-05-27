@@ -1,0 +1,55 @@
+.order-history {
+  padding: 24px;
+}
+
+.order-history h2 {
+  font-size: 1.22rem;
+  margin-bottom: 16px;
+}
+
+article {
+  align-items: center;
+  border-top: 1px solid var(--border);
+  display: grid;
+  gap: 15px;
+  grid-template-columns: 1fr auto auto auto;
+  padding: 17px 0;
+}
+
+article div {
+  display: flex;
+  flex-direction: column;
+}
+
+article div span {
+  color: var(--ink-500);
+  font-size: 0.8rem;
+}
+
+.status {
+  background: #ecfdf5;
+  border-radius: 999px;
+  color: var(--success);
+  font-size: 0.78rem;
+  padding: 6px 10px;
+}
+
+button {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--primary);
+  padding: 8px 12px;
+}
+
+article p {
+  color: var(--ink-600);
+  font-size: 0.85rem;
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 540px) {
+  article {
+    grid-template-columns: 1fr auto;
+  }
+}

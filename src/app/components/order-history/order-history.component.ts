@@ -11,18 +11,18 @@ import { FormsModule } from '@angular/forms';
 })
 export class OrderHistoryComponent implements OnInit {
   orders: any[] = [];
+  selectedOrderId = '';
 
   constructor(private orderService: OrderService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.orderService.getOrderHistory().subscribe({
       next: (data) => (this.orders = data),
       error: (error) => console.error('Failed to fetch order history', error)
     });
   }
 
-  viewOrderDetails(orderId: string) {
-    // Implement logic to view detailed order
-    console.log(`Viewing details for order ID: ${orderId}`);
+  viewOrderDetails(orderId: string): void {
+    this.selectedOrderId = orderId;
   }
 }

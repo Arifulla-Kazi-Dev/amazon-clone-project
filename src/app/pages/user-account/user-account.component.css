@@ -1,139 +1,277 @@
-.user-account {
-    max-width: 800px;
-    margin: 0 auto;
-    font-family: Arial, sans-serif;
-    color: #333;
-  }
-  
-  h1, h2 {
-    color: #333;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 8px;
-  }
-  
-  .personal-info, .order-history, .account-settings {
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  label {
-    display: block;
-    margin-top: 8px;
-  }
-  
-  input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 4px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-  }
-  
-  button {
-    margin-top: 12px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    background-color: #0073e6;
-    color: white;
-  }
-  
-  button:hover {
-    background-color: #005bb5;
-  }
-  
-  .order-item {
-    border-bottom: 1px solid #ddd;
-    padding: 10px 0;
-  }
-  
-  .order-item p {
-    margin: 4px 0;
-  }
-  
-  .order-item button {
-    margin-top: 10px;
-    background-color: #ff9800;
-  }
-  
-  .order-item button:hover {
-    background-color: #e68900;
-  }
-  
-  /* Responsive Design */
+.account-page {
+  padding-block: clamp(30px, 5vw, 54px);
+}
 
-/* Medium Screens (Tablets) */
-@media (max-width: 768px) {
-  .user-account {
-    padding: 20px;
-    font-size: 14px; /* Adjust font size for smaller screens */
+.account-header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 27px;
+}
+
+.account-header h1 {
+  margin-top: 7px;
+}
+
+.member-pill {
+  background: #e0f2fe;
+  border-radius: 999px;
+  color: #0369a1;
+  font-size: 0.82rem;
+  font-weight: 650;
+  padding: 9px 15px;
+}
+
+.notice {
+  background: #ecfdf5;
+  border: 1px solid #bbf7d0;
+  border-radius: 10px;
+  color: #047857;
+  font-size: 0.9rem;
+  margin-bottom: 22px;
+  padding: 12px 15px;
+}
+
+.account-layout {
+  align-items: start;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 252px minmax(0, 1fr);
+}
+
+.profile {
+  padding: 27px 19px 17px;
+  position: sticky;
+  text-align: center;
+  top: 108px;
+}
+
+.avatar {
+  align-items: center;
+  background: var(--surface-tint);
+  border-radius: 50%;
+  color: var(--primary);
+  display: inline-flex;
+  font-size: 1.8rem;
+  font-weight: 700;
+  height: 70px;
+  justify-content: center;
+  margin-bottom: 13px;
+  width: 70px;
+}
+
+.profile h2 {
+  font-size: 1.1rem;
+}
+
+.profile > p {
+  color: var(--ink-600);
+  font-size: 0.83rem;
+  margin: 4px 0 27px;
+}
+
+.profile nav {
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-top: 14px;
+  text-align: left;
+}
+
+.profile nav button {
+  background: transparent;
+  border: 0;
+  border-radius: 9px;
+  color: var(--ink-600);
+  font-size: 0.9rem;
+  font-weight: 550;
+  padding: 11px 13px;
+  text-align: left;
+  width: 100%;
+}
+
+.profile nav button:hover,
+.profile nav button.selected {
+  background: var(--surface-tint);
+  color: var(--primary);
+}
+
+.account-content {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.account-card {
+  padding: 24px;
+}
+
+.account-anchor {
+  scroll-margin-top: 122px;
+}
+
+.card-title {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.account-card h2 {
+  font-size: 1.14rem;
+}
+
+.text-button {
+  background: transparent;
+  border: 0;
+  color: var(--primary);
+  font-size: 0.87rem;
+  font-weight: 650;
+}
+
+.info-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.info-grid p {
+  color: var(--ink-800);
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  gap: 5px;
+}
+
+.info-grid span {
+  color: var(--ink-500);
+  font-size: 0.78rem;
+}
+
+.edit-form {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.edit-form label {
+  color: var(--ink-600);
+  display: flex;
+  flex-direction: column;
+  font-size: 0.82rem;
+  gap: 7px;
+}
+
+.edit-form button {
+  grid-column: 1 / -1;
+  width: fit-content;
+}
+
+.address {
+  color: var(--ink-600);
+  font-size: 0.93rem;
+}
+
+.orders article {
+  align-items: center;
+  border-top: 1px solid var(--border);
+  display: grid;
+  gap: 15px;
+  grid-template-columns: 1fr auto 90px auto;
+  padding: 17px 0;
+}
+
+.orders article div {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+}
+
+.orders article div span {
+  color: var(--ink-500);
+  font-size: 0.78rem;
+}
+
+.status {
+  background: #ecfdf5;
+  border-radius: 999px;
+  color: #047857;
+  font-size: 0.77rem;
+  font-weight: 600;
+  padding: 6px 10px;
+}
+
+.order-count {
+  color: var(--ink-500);
+  font-size: 0.84rem;
+}
+
+.orders article button {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--ink-800);
+  font-size: 0.8rem;
+  font-weight: 550;
+  padding: 8px 12px;
+}
+
+.settings h2 {
+  margin-bottom: 8px;
+}
+
+.settings > div {
+  align-items: center;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  padding-top: 17px;
+  margin-top: 17px;
+}
+
+.settings p {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.settings p span {
+  color: var(--ink-600);
+  font-size: 0.83rem;
+}
+
+@media (max-width: 830px) {
+  .account-layout {
+    grid-template-columns: 1fr;
   }
 
-  h1, h2 {
-    font-size: 20px; /* Adjust heading sizes for readability */
+  .profile {
+    position: static;
   }
 
-  .personal-info, .order-history, .account-settings {
-    padding: 12px;
+  .profile nav {
+    flex-direction: row;
+    overflow-x: auto;
   }
 
-  label {
-    font-size: 14px; /* Slightly smaller label font size */
-  }
-
-  input {
-    padding: 10px; /* Increase input padding for easier typing */
-  }
-
-  button {
-    padding: 8px 16px; /* Reduce button size for smaller screens */
-  }
-
-  .order-item {
-    padding: 8px 0; /* Slightly reduce padding in order items */
-  }
-
-  .order-item button {
-    padding: 8px 16px; /* Reduce button padding in order items */
+  .profile nav button {
+    min-width: max-content;
+    width: auto;
   }
 }
 
-/* Small Screens (Mobile) */
-@media (max-width: 480px) {
-  .user-account {
-    padding: 10px;
-    font-size: 12px; /* Adjust font size for mobile */
+@media (max-width: 620px) {
+  .info-grid,
+  .edit-form {
+    grid-template-columns: 1fr;
   }
 
-  h1, h2 {
-    font-size: 18px; /* Adjust heading sizes for better mobile readability */
+  .orders article {
+    grid-template-columns: 1fr auto;
   }
 
-  .personal-info, .order-history, .account-settings {
-    padding: 10px;
-  }
-
-  label {
-    font-size: 12px; /* Adjust label size for mobile */
-  }
-
-  input {
-    padding: 12px; /* Ensure inputs are large enough for mobile users */
-  }
-
-  button {
-    padding: 6px 12px; /* Smaller button for better fit on small screens */
-  }
-
-  .order-item {
-    padding: 6px 0; /* Reduce padding for order items on mobile */
-  }
-
-  .order-item button {
-    padding: 6px 12px; /* Adjust button size within order items */
+  .orders article button {
+    grid-column: 1 / -1;
   }
 }

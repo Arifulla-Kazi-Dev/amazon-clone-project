@@ -7,6 +7,7 @@ import { Product } from '../models/product.model';
   providedIn: 'root'
 })
 export class CartService {
+  private readonly storageKey = 'novaCartItemsInrV1';
   private cartItems: Product[] = [];
   private cartItemsSubject = new BehaviorSubject<Product[]>(this.cartItems);
 
@@ -18,17 +19,42 @@ export class CartService {
   }
 
   addToCart(product: Product): void {
+    this.addQuantity(product, 1);
+  }
+
+  addQuantity(product: Product, quantity: number): void {
     const existingProduct = this.cartItems.find(item => item.id === product.id);
     if (existingProduct) {
-      existingProduct.quantity += 1;
+      existingProduct.quantity += quantity;
     } else {
-      this.cartItems.push({ ...product, quantity: 1 });
+      this.cartItems.push({ ...product, quantity });
     }
     this.updateCart();
   }
 
+  updateQuantity(productId: number, quantity: number): void {
+    if (quantity < 1) {
+      this.removeFromCart(productId);
+      return;
+    }
+
+    const product = this.cartItems.find(item => item.id === productId);
+    if (product) {
+      product.quantity = quantity;
+      this.updateCart();
+    }
+  }
+
   getTotal(): number {
     return this.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  }
+
+  getItemCount(): number {
+    return this.cartItems.reduce((total, item) => total + item.quantity, 0);
+  }
+
+  hasProduct(productId: number): boolean {
+    return this.cartItems.some(item => item.id === productId);
   }
 
   removeFromCart(productId: number): void {
@@ -43,15 +69,21 @@ export class CartService {
 
   private loadCartItems(): Product[] {
     if (isPlatformBrowser(this.platformId)) {
-      const items = localStorage.getItem('cartItems');
-      return items ? JSON.parse(items) : [];
+      try {
+        const items = localStorage.getItem(this.storageKey);
+        const parsedItems: unknown = items ? JSON.parse(items) : [];
+        return Array.isArray(parsedItems) ? parsedItems as Product[] : [];
+      } catch {
+        localStorage.removeItem(this.storageKey);
+      }
     }
     return [];
   }
 
   private updateCart(): void {
     if (isPlatformBrowser(this.platformId)) {
-      localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+      localStorage.removeItem('cartItems');
+      localStorage.setItem(this.storageKey, JSON.stringify(this.cartItems));
     }
     this.cartItemsSubject.next([...this.cartItems]);
   }

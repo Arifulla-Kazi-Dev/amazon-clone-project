@@ -19,7 +19,7 @@ export class AddressFormComponent {
       street: ['', Validators.required],
       city: ['', Validators.required],
       state: ['', Validators.required],
-      postalCode: ['', [Validators.required, Validators.pattern('^[0-9]{5}$')]],
+      postalCode: ['', [Validators.required, Validators.pattern('^[0-9]{6}$')]],
       country: ['', Validators.required]
     });
   }

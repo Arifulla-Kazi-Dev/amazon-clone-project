@@ -1,1 +1,18 @@
-<p>product-management works!</p>
+<section class="management panel">
+  <div class="section-top">
+    <div>
+      <h2>Product inventory</h2>
+      <p>{{ products.length }} active products in the catalog</p>
+    </div>
+    <button class="btn btn-primary" type="button">Add product</button>
+  </div>
+  <div class="table">
+    <article *ngFor="let product of products">
+      <img [src]="product.image" [alt]="product.name" loading="lazy" (error)="showFallbackImage($event)">
+      <div class="name"><strong>{{ product.name }}</strong><span>{{ product.category === 'HomeKitchen' ? 'Home & Kitchen' : product.category }}</span></div>
+      <strong>{{ product.price | currency: 'INR': 'symbol': '1.0-0' }}</strong>
+      <span class="stock">In stock</span>
+      <button type="button">Edit</button>
+    </article>
+  </div>
+</section>
