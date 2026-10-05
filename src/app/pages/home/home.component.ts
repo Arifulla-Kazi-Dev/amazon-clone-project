@@ -17,19 +17,19 @@ export class HomeComponent {
     {
       name: 'Electronics',
       route: '/electronics',
-      image: '/assets/products/electronics.jpg',
+      image: 'assets/products/electronics.jpg',
       description: 'Smart tech and sound'
     },
     {
       name: 'Fashion',
       route: '/fashion',
-      image: '/assets/products/fashion.jpg',
+      image: 'assets/products/fashion.jpg',
       description: 'Everyday style edits'
     },
     {
       name: 'Home & Kitchen',
       route: '/home-kitchen',
-      image: '/assets/products/home-kitchen.jpg',
+      image: 'assets/products/home-kitchen.jpg',
       description: 'Upgrade your space'
     }
   ];
@@ -49,6 +49,6 @@ export class HomeComponent {
 
   showFallbackImage(event: Event): void {
     const image = event.target as HTMLImageElement;
-    image.src = '/assets/product-placeholder.svg';
+    image.src = 'assets/product-placeholder.svg';
   }
 }

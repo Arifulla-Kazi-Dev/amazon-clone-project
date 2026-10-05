@@ -53,6 +53,6 @@ export class ProductCardComponent implements OnInit {
 
   showFallbackImage(event: Event): void {
     const image = event.target as HTMLImageElement;
-    image.src = '/assets/product-placeholder.svg';
+    image.src = 'assets/product-placeholder.svg';
   }
 }

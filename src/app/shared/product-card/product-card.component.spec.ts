@@ -23,7 +23,7 @@ describe('ProductCardComponent', () => {
       description: 'Wireless audio',
       quantity: 1,
       category: 'Electronics',
-      image: '/assets/products/sony-headphones.jpg',
+      image: 'assets/products/sony-headphones.jpg',
       rating: 4.5,
       reviewCount: 20
     };
